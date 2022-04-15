@@ -1,3 +1,5 @@
+import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
+import 'package:acadeque_student_app/modules/doubt_screen/doubt_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_state.dart';
 import 'package:acadeque_student_app/modules/register/register_screen.dart';
@@ -43,6 +45,10 @@ class App extends StatelessWidget {
           '/welcome': (context) => ChangeNotifierProvider(
                 create: (_) => WelcomeState(),
                 child: const WelcomeScreen(),
+              ),
+          '/doubt': (context) => ChangeNotifierProvider(
+                create: (_) => DoubtState(),
+                child: const DoubtScreen(),
               ),
         },
         initialRoute: '/splash',

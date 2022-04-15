@@ -99,7 +99,7 @@ class WelcomeScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context, "/kera");
+                            Navigator.pushNamed(context, "/doubt");
                           },
                           child: Container(
                             decoration: BoxDecoration(
