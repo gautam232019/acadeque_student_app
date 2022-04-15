@@ -1,101 +1,152 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
-import 'package:acadeque_student_app/modules/login/login_state.dart';
+import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<LoginState>(context);
-    Size size = MediaQuery.of(context).size;
+    final state = Provider.of<RegisterState>(context);
 
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          width: double.infinity,
-          height: size.height,
-          child: Form(
-            key: state.formKey,
+        body: Form(
+          key: state.formKey,
+          child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  height: 227,
+                  height: 250,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/images/login.png'),
                         fit: BoxFit.cover),
                   ),
-                  child: const Center(
-                      child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Color(0xFF373737),
-                        fontFamily: 'Roboto',
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700),
-                  )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(top: 70.0),
+                        child: Center(
+                            child: Text(
+                          "Register",
+                          style: TextStyle(
+                              color: Color(0xFF373737),
+                              fontFamily: 'Roboto',
+                              fontSize: 32,
+                              fontWeight: FontWeight.w700),
+                        )),
+                      ),
+                      const SizedBox(
+                        height: 35,
+                      ),
+                      Stack(
+                        children: [
+                          Image.asset('assets/images/upload.png'),
+                          const Positioned(
+                            child: Text(
+                              'Upload\nPhoto',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            top: 35,
+                            left: 30,
+                          ),
+                          Positioned(
+                            child: SvgPicture.asset(
+                              'assets/svg/upload.svg',
+                            ),
+                            top: 10,
+                            right: 0,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 60, left: 30, right: 30, bottom: 20),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                          validator: (val) {
-                            return null;
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "Username or Email",
-                            hintText: '',
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17.5,
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.bold),
-                            labelStyle: TextStyle(
-                                color: Color(0xFFA1A1A1),
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Enter Password';
-                          }
-                        },
-                        decoration: const InputDecoration(
-                          labelText: "Password",
+                      top: 20, left: 30, right: 30, bottom: 20),
+                  child: TextFormField(
+                      validator: (val) {
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        labelText: "Username",
+                        hintText: '',
+                        hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            color: Color(0xFFA1A1A1),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                      )),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+                  child: TextFormField(
+                      validator: (val) {
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                          labelText: "Email",
                           hintText: '',
                           hintStyle: TextStyle(
                               color: Colors.black,
-                              fontSize: 17.5,
+                              fontSize: 10,
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold),
                           labelStyle: TextStyle(
                               color: Color(0xFFA1A1A1),
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
+                              fontSize: 18),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+                  child: TextFormField(
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'Enter password';
+                        }
+                      },
+                      decoration: const InputDecoration(
+                          labelText: "Create Password",
+                          hintText: '',
+                          hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold),
+                          labelStyle: TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 GestureDetector(
                   onTap: () async {},
                   child: Container(
                     height: 48,
-                    width: 263,
+                    width: 327,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: primaryColor,
@@ -104,7 +155,7 @@ class LoginScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       child: Center(
                         child: Text(
-                          'LOGIN',
+                          'CREATE ACCOUNT',
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -118,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                   height: 20,
                 ),
                 const Text(
-                  "or Login With",
+                  "or Sign Up With",
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 14,
@@ -212,23 +263,18 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "New User?",
+                      "Already a User?",
                       style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.normal,
                           color: Color(0xFF919191)),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/register');
-                      },
+                      onTap: () {},
                       child: SizedBox(
                         height: 48,
-                        width: 126,
+                        width: 60,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: const [
@@ -237,7 +283,7 @@ class LoginScreen extends StatelessWidget {
                                   horizontal: 5, vertical: 5),
                               child: Center(
                                 child: Text(
-                                  'Sign Up Now',
+                                  'Login',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,

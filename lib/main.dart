@@ -1,5 +1,7 @@
 import 'package:acadeque_student_app/modules/login/login_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_state.dart';
+import 'package:acadeque_student_app/modules/register/register_screen.dart';
+import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +28,12 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => ChangeNotifierProvider(
                 create: (_) => LoginState(),
-                child: LoginScreen(),
-              )
+                child: const LoginScreen(),
+              ),
+          '/register': (context) => ChangeNotifierProvider(
+                create: (_) => RegisterState(),
+                child: const RegisterScreen(),
+              ),
         },
         initialRoute: '/login',
         debugShowCheckedModeBanner: false,
