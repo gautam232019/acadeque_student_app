@@ -36,6 +36,8 @@ dependencies:
   provider: ^6.0.2
   oktoast: ^3.1.5
   flutter_svg: ^1.0.3
+  get_storage: ^2.0.3
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:
@@ -77,12 +79,12 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
           weight: 400
 
     - family: Rubik
       fonts:
-        - asset: fonts/Rubik-Medium.ttf
+        - asset: assets/fonts/Rubik-Medium.ttf
           weight: 500
 
   #
