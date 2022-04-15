@@ -8,7 +8,6 @@ import 'package:dio/dio.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class HomeState extends BaseState {
-  String id = "";
   Dio dio = getHttp();
 
   HomeState() {
@@ -17,6 +16,7 @@ class HomeState extends BaseState {
     getTeachers();
   }
   String? token;
+  String id = "";
 
   Map<String, dynamic>? user;
 

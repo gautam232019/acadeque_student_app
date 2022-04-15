@@ -24,7 +24,7 @@ class _TutorProfileState extends State<TutorProfile> {
                   borderRadius: BorderRadius.circular(8)),
               height: 72,
               width: 84,
-              child: Icon(
+              child: const Icon(
                 Icons.play_arrow_rounded,
                 size: 50,
                 color: Colors.grey,
@@ -38,7 +38,7 @@ class _TutorProfileState extends State<TutorProfile> {
               children: [
                 Text(
                   widget.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

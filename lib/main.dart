@@ -4,6 +4,8 @@ import 'package:acadeque_student_app/modules/login/login_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_state.dart';
 import 'package:acadeque_student_app/modules/notifications/notification_state.dart';
 import 'package:acadeque_student_app/modules/notifications/notifications_screen.dart';
+import 'package:acadeque_student_app/modules/question_screen/question_screen.dart';
+import 'package:acadeque_student_app/modules/question_screen/question_state.dart';
 import 'package:acadeque_student_app/modules/register/register_screen.dart';
 import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:acadeque_student_app/modules/splash/splash_screen.dart';
@@ -55,6 +57,10 @@ class App extends StatelessWidget {
           '/notifications': (context) => ChangeNotifierProvider(
                 create: (_) => NotificationState(),
                 child: const NotificationScreen(),
+              ),
+          '/question_screen': (context) => ChangeNotifierProvider(
+                create: (_) => QuestionState(),
+                child: const QuestionScreen(),
               ),
         },
         initialRoute: '/splash',
