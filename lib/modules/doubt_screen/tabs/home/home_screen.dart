@@ -1,6 +1,6 @@
+import 'package:acadeque_student_app/common/ui/tutor_profile.dart';
 import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/home_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jiffy/jiffy.dart';
@@ -77,8 +77,8 @@ class HomeScreen extends StatelessWidget {
                             horizontal: 20, vertical: 22),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               'Need any help',
                               style: TextStyle(
                                 fontSize: 16,
@@ -86,10 +86,10 @@ class HomeScreen extends StatelessWidget {
                                 fontFamily: 'Roboto',
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               height: 8,
                             ),
-                            const Text(
+                            Text(
                               'Ask any question from experts\nand clear out your doubt Now!',
                               style: TextStyle(
                                   fontSize: 20,
@@ -145,25 +145,31 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                // loading
-                //     ? const Center(child: CircularProgressIndicator())
-                //     : teachersState?.data?.teachers?.isEmpty ?? true
-                //         ? const Center(
-                //             child: Text("No Teachers"),
-                //           )
-                //         : Column(
-                //             children: teachersState!.data!.teachers!
-                //                 .map((e) => Column(
-                //                       children: [
-                //                         TutorProfile(
-                //                           name: e.name!,
-                //                           rating: e.avgRating.toString(),
-                //                         ),
-                //                         DividerLine(),
-                //                       ],
-                //                     ))
-                //                 .toList(),
-                //           ),
+                state.teacherLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : state.teachersState?.data?.teachers?.isEmpty ?? true
+                        ? const Center(
+                            child: Text("No Teachers"),
+                          )
+                        : Column(
+                            children: state.teachersState!.data!.teachers!
+                                .map((e) => Column(
+                                      children: [
+                                        TutorProfile(
+                                          name: e.name!,
+                                          rating: e.avgRating.toString(),
+                                        ),
+                                        const Divider(
+                                          color: Color(0xFFE5E5E5),
+                                          height: 30,
+                                          thickness: 1,
+                                          indent: 5,
+                                          endIndent: 5,
+                                        ),
+                                      ],
+                                    ))
+                                .toList(),
+                          ),
               ],
             ),
     );
