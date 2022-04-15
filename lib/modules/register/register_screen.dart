@@ -1,4 +1,5 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,7 +72,11 @@ class RegisterScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 20, left: 30, right: 30, bottom: 20),
                   child: TextFormField(
+                      onChanged: state.onUserNameChange,
                       validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter username!";
+                        }
                         return null;
                       },
                       decoration: const InputDecoration(
@@ -95,7 +100,11 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
+                      onChanged: state.onEmailChange,
                       validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter email!";
+                        }
                         return null;
                       },
                       decoration: const InputDecoration(
@@ -118,10 +127,12 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
+                      onChanged: state.onPasswordChange,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
-                          return 'Enter password';
+                          return "Please enter password!";
                         }
+                        return null;
                       },
                       decoration: const InputDecoration(
                           labelText: "Create Password",
@@ -143,7 +154,9 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: () async {},
+                  onTap: () {
+                    state.onSubmit(context);
+                  },
                   child: Container(
                     height: 48,
                     width: 327,
@@ -151,15 +164,26 @@ class RegisterScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                       color: primaryColor,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 5),
                       child: Center(
-                        child: Text(
-                          'CREATE ACCOUNT',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (state.loading)
+                              const CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            sWidthSpan,
+                            const Text(
+                              'CREATE ACCOUNT',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
                         ),
                       ),
                     ),

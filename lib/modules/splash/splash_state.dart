@@ -19,7 +19,6 @@ class SplashState extends BaseState {
       );
 
       if (token.isNotEmpty) {
-        print("laod kha mero ");
         checkToken(context);
       } else {
         Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
@@ -29,7 +28,6 @@ class SplashState extends BaseState {
   }
 
   checkToken(context) async {
-    print("yaha aepuge");
     try {
       await dio.get('/teachers?sort=-createdAt');
       Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);

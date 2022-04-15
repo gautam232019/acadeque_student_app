@@ -13,6 +13,8 @@ class WelcomeScreen extends StatelessWidget {
           child: Text('kera'),
           onPressed: () {
             LocalStorageService().clear(LocalStorageKeys.accessToken);
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/login', (route) => false);
           },
         ),
       ),
