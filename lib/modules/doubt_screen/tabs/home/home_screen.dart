@@ -1,7 +1,9 @@
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/home_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,14 +33,17 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Welcome ${state.userDetailState?.data?.student?.name ?? "No name"}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                                 fontFamily: 'Roboto'),
                           ),
-                          const Text(
-                            'Thursday, 9th Sep 20',
-                            style: TextStyle(
+                          sHeightSpan,
+                          Text(
+                            Jiffy(DateTime.now())
+                                .format("EEEE, do MMM yyyy")
+                                .toString(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 14,
                             ),
