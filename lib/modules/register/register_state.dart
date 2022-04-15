@@ -8,6 +8,13 @@ class RegisterState extends BaseState {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Dio dio = getHttp();
 
+  bool hidePassword = true;
+
+  changeVisibility() {
+    hidePassword = !hidePassword;
+    notifyListeners();
+  }
+
   String userName = "";
   String email = "";
   String password = "";

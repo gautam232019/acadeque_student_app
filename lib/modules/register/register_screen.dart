@@ -127,6 +127,7 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
+                      obscureText: state.hidePassword,
                       onChanged: state.onPasswordChange,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
@@ -134,20 +135,26 @@ class RegisterScreen extends StatelessWidget {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                          suffixIcon: InkWell(
+                            child: state.hidePassword
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility),
+                            onTap: state.changeVisibility,
+                          ),
                           labelText: "Create Password",
                           hintText: '',
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                               color: Colors.black,
                               fontSize: 10,
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold),
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                               color: Color(0xFFA1A1A1),
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
-                          border: UnderlineInputBorder(
+                          border: const UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)))),
                 ),
                 const SizedBox(

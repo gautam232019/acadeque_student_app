@@ -67,6 +67,7 @@ class LoginScreen extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
+                          obscureText: state.hidePassword,
                           onChanged: state.onPasswordChange,
                           validator: (val) {
                             if (val == null || val.isEmpty) {
@@ -74,15 +75,21 @@ class LoginScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                              child: state.hidePassword
+                                  ? const Icon(Icons.visibility_off)
+                                  : const Icon(Icons.visibility),
+                              onTap: state.changeVisibility,
+                            ),
                             labelText: "Password",
                             hintText: '',
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 17.5,
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.bold),
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color(0xFFA1A1A1),
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.bold,
