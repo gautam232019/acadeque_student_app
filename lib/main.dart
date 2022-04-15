@@ -4,6 +4,8 @@ import 'package:acadeque_student_app/modules/register/register_screen.dart';
 import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:acadeque_student_app/modules/splash/splash_screen.dart';
 import 'package:acadeque_student_app/modules/splash/splash_state.dart';
+import 'package:acadeque_student_app/modules/welcome_screen/welcome_screen.dart';
+import 'package:acadeque_student_app/modules/welcome_screen/welcome_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
@@ -11,13 +13,13 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(const App());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -25,10 +27,6 @@ class MyApp extends StatelessWidget {
     return OKToast(
       child: MaterialApp(
         key: navigatorKey,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         routes: {
           '/login': (context) => ChangeNotifierProvider(
                 create: (_) => LoginState(),
@@ -39,11 +37,15 @@ class MyApp extends StatelessWidget {
                 child: const RegisterScreen(),
               ),
           '/splash': (context) => ChangeNotifierProvider(
-                create: (_) => SplashState(),
+                create: (_) => SplashState(context),
                 child: const SplashScreen(),
               ),
+          '/welcome': (context) => ChangeNotifierProvider(
+                create: (_) => WelcomeState(),
+                child: const WelcomeScreen(),
+              ),
         },
-        initialRoute: '/login',
+        initialRoute: '/splash',
         debugShowCheckedModeBanner: false,
       ),
     );

@@ -1,4 +1,6 @@
+import 'package:acadeque_student_app/modules/splash/splash_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -6,7 +8,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    final state = Provider.of<SplashState>(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(

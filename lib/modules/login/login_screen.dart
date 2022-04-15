@@ -93,7 +93,9 @@ class LoginScreen extends StatelessWidget {
                           height: 30,
                         ),
                         GestureDetector(
-                          onTap: state.onSubmit,
+                          onTap: () {
+                            state.onSubmit(context);
+                          },
                           child: Container(
                             height: 48,
                             width: 263,
