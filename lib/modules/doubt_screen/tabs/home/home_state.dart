@@ -11,13 +11,12 @@ class HomeState extends BaseState {
   String id = "";
   Dio dio = getHttp();
 
-  String? token;
-
   HomeState() {
     getToken();
     getUserDetail();
     getTeachers();
   }
+  String? token;
 
   Map<String, dynamic>? user;
 

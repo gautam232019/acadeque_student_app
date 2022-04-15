@@ -36,14 +36,19 @@ class NotificationScreen extends StatelessWidget {
                 Row(
                   children: [
                     lWidthSpan,
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        height: 40,
+                        width: 40,
+                        child: const Icon(Icons.arrow_back),
                       ),
-                      height: 40,
-                      width: 40,
-                      child: const Icon(Icons.arrow_back),
                     ),
                   ],
                 ),
