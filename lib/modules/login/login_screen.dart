@@ -25,14 +25,15 @@ class LoginScreen extends StatelessWidget {
                         fit: BoxFit.cover),
                   ),
                   child: const Center(
-                      child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Color(0xFF373737),
-                        fontFamily: 'Roboto',
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700),
-                  )),
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Color(0xFF373737),
+                          fontFamily: 'Roboto',
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
                 ),
                 Form(
                   key: state.formKey,

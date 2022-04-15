@@ -51,7 +51,9 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/notifications");
+                        },
                         child: SizedBox(
                           height: 24.92,
                           width: 22,
