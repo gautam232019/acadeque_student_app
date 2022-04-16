@@ -32,6 +32,8 @@ class SplashState extends BaseState {
       await dio.get('/teachers?sort=-createdAt');
       Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
       // ignore: empty_catches
-    } catch (err) {}
+    } catch (err) {
+      Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+    }
   }
 }

@@ -57,6 +57,8 @@ class Teachers {
   bool? disabled;
   String? createdAt;
   int? iV;
+  String? description;
+  int? hourlyRate;
 
   Teachers(
       {this.sId,
@@ -69,7 +71,9 @@ class Teachers {
       this.enableInstantSession,
       this.disabled,
       this.createdAt,
-      this.iV});
+      this.iV,
+      this.description,
+      this.hourlyRate});
 
   Teachers.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -88,6 +92,8 @@ class Teachers {
     disabled = json['disabled'];
     createdAt = json['createdAt'];
     iV = json['__v'];
+    description = json['description'];
+    hourlyRate = json['hourlyRate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,6 +111,8 @@ class Teachers {
     data['disabled'] = this.disabled;
     data['createdAt'] = this.createdAt;
     data['__v'] = this.iV;
+    data['description'] = this.description;
+    data['hourlyRate'] = this.hourlyRate;
     return data;
   }
 }

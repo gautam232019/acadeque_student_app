@@ -1,14 +1,18 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
 import 'package:acadeque_student_app/common/ui/divider_line.dart';
 import 'package:acadeque_student_app/common/ui/tutoring_tutor_widget.dart';
+import 'package:acadeque_student_app/modules/tutoring_screen/tabs/stat_screen/stat_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class StatScreen extends StatelessWidget {
   const StatScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<StatState>(context);
+
     final size = MediaQuery.of(context).size.height;
     return Container(
       color: primaryColor,
