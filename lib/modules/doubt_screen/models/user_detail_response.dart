@@ -42,13 +42,15 @@ class Student {
   String? sId;
   String? name;
   String? email;
+  int? contact;
 
-  Student({this.sId, this.name, this.email});
+  Student({this.sId, this.name, this.email, this.contact});
 
   Student.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     email = json['email'];
+    contact = json['contact'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +58,7 @@ class Student {
     data['_id'] = this.sId;
     data['name'] = this.name;
     data['email'] = this.email;
+    data['contact'] = this.contact;
     return data;
   }
 }

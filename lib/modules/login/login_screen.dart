@@ -43,27 +43,28 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
-                            onChanged: state.onUserNameChange,
-                            validator: (val) {
-                              if (val == null || val.isEmpty) {
-                                return "Please enter username or email!";
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              labelText: "Username or Email",
-                              hintText: '',
-                              hintStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17.5,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold),
-                              labelStyle: TextStyle(
-                                  color: Color(0xFFA1A1A1),
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14),
-                            )),
+                          onChanged: state.onUserNameChange,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return "Please enter username or email!";
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                            labelText: "Username or Email",
+                            hintText: '',
+                            hintStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17.5,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold),
+                            labelStyle: TextStyle(
+                                color: Color(0xFFA1A1A1),
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
