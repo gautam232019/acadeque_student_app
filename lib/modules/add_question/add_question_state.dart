@@ -1,0 +1,90 @@
+import 'dart:io';
+
+import 'package:acadeque_student_app/core/http/http.dart';
+import 'package:acadeque_student_app/core/services/toast_service.dart';
+import 'package:acadeque_student_app/core/state/base_state.dart';
+import 'package:acadeque_student_app/modules/add_question/models/subject_response.dart';
+import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+
+class AddQuestionState extends BaseState {
+  Dio dio = getHttp();
+  final ImagePicker picker = ImagePicker();
+
+  File? imagefile;
+
+  pickFromCamera(context) async {
+    final XFile? file = await picker.pickImage(source: ImageSource.camera);
+    if (file != null) {
+      // final temporaryImage = File(fileBits, fileName);
+      imagefile = File(file.path);
+    }
+    notifyListeners();
+  }
+
+  String question = "";
+  onQuestionChange(val) {
+    question = val;
+    notifyListeners();
+  }
+
+  bool createQuestionLoading = false;
+  onQuestionLoading(val) {
+    createQuestionLoading = val;
+    notifyListeners();
+  }
+
+  onSubmit() async {
+    onQuestionLoading(true);
+    if (subject != null && question.isNotEmpty && imagefile != null) {
+      try {
+        var data = {
+          "question": question,
+          "subjectId": subject,
+          "media": imagefile!.path,
+        };
+        // print(data);
+        final response = await dio.post("/questions", data: data);
+        print(response.data);
+      } catch (err) {
+        print(err);
+      }
+    } else {
+      ToastService().w("Please fill all fields!");
+    }
+    // print(imagefile);
+    onQuestionLoading(false);
+  }
+
+  pickFromGallery(context) async {
+    final XFile? file = await picker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      // final temporaryImage = File(fileBits, fileName);
+      imagefile = File(file.path);
+    }
+    notifyListeners();
+  }
+
+  AddQuestionState() {
+    fetchSubjects();
+  }
+
+  SubjectResponse? subjectState;
+
+  String? subject;
+
+  onSubjectChange(val) {
+    subject = val;
+    notifyListeners();
+  }
+
+  fetchSubjects() async {
+    setLoading(true);
+    try {
+      final response = await dio.get("/subjects");
+      subjectState = SubjectResponse.fromJson(response.data);
+      // ignore: empty_catches
+    } catch (err) {}
+    setLoading(false);
+  }
+}

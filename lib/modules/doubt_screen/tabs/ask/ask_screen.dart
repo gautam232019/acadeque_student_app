@@ -92,9 +92,13 @@ class AskScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => NewQuestion()));
+          onPressed: () async {
+            final result = await Navigator.pushNamed(context, "/add_question");
+            if (result == null) {
+              print("kei garena");
+            } else {
+              print("question halyo");
+            }
           },
           // backgroundColor: colorBox,
           child: const Icon(Icons.add)),
