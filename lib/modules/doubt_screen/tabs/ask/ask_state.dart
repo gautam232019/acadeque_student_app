@@ -3,7 +3,6 @@ import 'package:acadeque_student_app/core/services/local_storage_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class AskState extends BaseState {

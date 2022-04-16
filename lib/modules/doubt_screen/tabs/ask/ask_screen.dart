@@ -63,7 +63,7 @@ class AskScreen extends StatelessWidget {
                       bottomRight: Radius.zero)),
               height: size * 0.8 - 68,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: SizedBox(
                   height: double.infinity,
                   width: double.infinity,
@@ -81,11 +81,8 @@ class AskScreen extends StatelessWidget {
                                 final item = state.studentQuestionsState!.data!
                                     .questions![index];
                                 return AskContainer(
-                                    isSolved: item.solved!,
-                                    // question: 'ques',
-                                    question: item.question!,
-                                    desc:
-                                        "Test Description because no description in  response.");
+                                  item: item,
+                                );
                               },
                             ),
                 ),

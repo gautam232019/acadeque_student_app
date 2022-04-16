@@ -1,18 +1,12 @@
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/ask_state.dart';
+import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AskContainer extends StatelessWidget {
-  final bool isSolved;
-  final String question;
-  final String desc;
-
-  const AskContainer({
-    Key? key,
-    required this.isSolved,
-    required this.question,
-    required this.desc,
-  }) : super(key: key);
+  Questions? item;
+  AskContainer({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +20,8 @@ class AskContainer extends StatelessWidget {
           child: InkWell(
             onTap: () {
               if (state.studentQuestionsState != null) {
-                Navigator.pushNamed(context, "/question_screen", arguments: {
-                  "question": "What is your name?",
-                  "ans": "chris ho vai"
-                });
+                Navigator.pushNamed(context, "/question_screen",
+                    arguments: item);
               }
             },
             child: Row(
@@ -44,16 +36,18 @@ class AskContainer extends StatelessWidget {
                     children: [
                       const Text(''),
                       Center(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFF59AEFD),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
-                                child: Text(
-                                    isSolved == true ? 'Solved' : 'Pending'),
-                              ))),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF59AEFD),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            child: Text(
+                                item!.solved == true ? 'Solved' : 'Pending'),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -70,7 +64,7 @@ class AskContainer extends StatelessWidget {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Text(
-                        question,
+                        item!.question!,
                         style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -79,9 +73,9 @@ class AskContainer extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
-                      Text(
-                        desc,
-                        style: const TextStyle(
+                      const Text(
+                        "Normal Descriptions",
+                        style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Roboto',

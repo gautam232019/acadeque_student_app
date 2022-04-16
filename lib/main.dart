@@ -59,7 +59,7 @@ class App extends StatelessWidget {
                 child: const NotificationScreen(),
               ),
           '/question_screen': (context) => ChangeNotifierProvider(
-                create: (_) => QuestionState(),
+                create: (_) => QuestionState(context),
                 child: const QuestionScreen(),
               ),
         },
