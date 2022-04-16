@@ -1,7 +1,3 @@
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/ask_screen.dart';
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/ask_state.dart';
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/home_screen.dart';
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/home_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/profile/profile_screen.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/profile/profile_state.dart';
 import 'package:acadeque_student_app/modules/tutoring_screen/tabs/appointment_screen/appointment_screen.dart';
