@@ -131,8 +131,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      image: new AssetImage("assets/images/placeholder.png"),
+                    image: const DecorationImage(
+                      image: AssetImage("assets/images/placeholder.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -158,8 +158,7 @@ class HomeScreen extends StatelessWidget {
                                 .map((e) => Column(
                                       children: [
                                         TutorProfile(
-                                          name: e.name!,
-                                          rating: e.avgRating.toString(),
+                                          teacherItem: e,
                                         ),
                                         const Divider(
                                           color: Color(0xFFE5E5E5),

@@ -1,10 +1,10 @@
+import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/models/teachers_response.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class TutorProfile extends StatefulWidget {
-  const TutorProfile({Key? key, required this.name, required this.rating})
-      : super(key: key);
-  final String name;
-  final String rating;
+  TutorProfile({Key? key, required this.teacherItem}) : super(key: key);
+  late Teachers? teacherItem;
 
   @override
   State<TutorProfile> createState() => _TutorProfileState();
@@ -37,7 +37,7 @@ class _TutorProfileState extends State<TutorProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.name,
+                  widget.teacherItem!.name!,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class _TutorProfileState extends State<TutorProfile> {
               Icons.star,
               color: Color(0xFFFBB344),
             ),
-            Text(widget.rating)
+            Text(widget.teacherItem!.avgRating!.toString())
           ],
         )
       ],
