@@ -10,6 +10,8 @@ import 'package:acadeque_student_app/modules/register/register_screen.dart';
 import 'package:acadeque_student_app/modules/register/register_state.dart';
 import 'package:acadeque_student_app/modules/splash/splash_screen.dart';
 import 'package:acadeque_student_app/modules/splash/splash_state.dart';
+import 'package:acadeque_student_app/modules/tutoring_screen/tutoring_screen.dart';
+import 'package:acadeque_student_app/modules/tutoring_screen/tutoring_state.dart';
 import 'package:acadeque_student_app/modules/welcome_screen/welcome_screen.dart';
 import 'package:acadeque_student_app/modules/welcome_screen/welcome_state.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +63,10 @@ class App extends StatelessWidget {
           '/question_screen': (context) => ChangeNotifierProvider(
                 create: (_) => QuestionState(context),
                 child: const QuestionScreen(),
+              ),
+          '/tutoring': (context) => ChangeNotifierProvider(
+                create: (_) => TutoringState(),
+                child: const TutoringScreen(),
               ),
         },
         initialRoute: '/splash',
