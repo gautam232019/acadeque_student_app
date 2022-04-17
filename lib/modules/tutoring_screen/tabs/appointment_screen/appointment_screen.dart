@@ -70,7 +70,7 @@ class AppointmentScreen extends StatelessWidget {
                   : state.studentQuestionsState?.data?.questions?.isEmpty ??
                           true
                       ? const Center(
-                          child: Text("No Questions"),
+                          child: Text("No Appointments"),
                         )
                       : SingleChildScrollView(
                           child: Column(

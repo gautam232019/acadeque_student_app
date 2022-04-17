@@ -12,7 +12,7 @@ class AppointmentState extends BaseState {
 
   AppointmentState() {
     getToken();
-    getQuestions();
+    getAppointments();
     setLoading(true);
   }
 
@@ -30,12 +30,12 @@ class AppointmentState extends BaseState {
     // print(userState?.userId!);
   }
 
-  getQuestions() async {
+  getAppointments() async {
     setLoading(true);
 
     try {
       // print("yo token ho $id");
-      final response = await dio.get("/students/$id/questions");
+      final response = await dio.get("/appointments");
       studentQuestionsState = StudentQuestionResponse.fromJson(response.data);
       notifyListeners();
       // ignore: empty_catches
