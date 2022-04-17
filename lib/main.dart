@@ -4,6 +4,8 @@ import 'package:acadeque_student_app/modules/confirmation/confiramtion_state.dar
 import 'package:acadeque_student_app/modules/confirmation/confirmation_screen.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doubt_screen.dart';
+import 'package:acadeque_student_app/modules/instructor_profile/instructor_profile_screen.dart';
+import 'package:acadeque_student_app/modules/instructor_profile/instructor_profile_state.dart';
 import 'package:acadeque_student_app/modules/login/login_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_state.dart';
 import 'package:acadeque_student_app/modules/notifications/notification_state.dart';
@@ -79,6 +81,10 @@ class App extends StatelessWidget {
           '/confirmation': (context) => ChangeNotifierProvider(
                 create: (_) => ConfirmationState(),
                 child: const ConfirmationScreen(),
+              ),
+          '/instructor_profile': (context) => ChangeNotifierProvider(
+                create: (_) => InstructorProfileState(context),
+                child: const InstructorProfileScreen(),
               ),
         },
         initialRoute: '/splash',

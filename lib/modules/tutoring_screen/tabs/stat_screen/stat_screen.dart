@@ -1,6 +1,7 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
 import 'package:acadeque_student_app/common/ui/divider_line.dart';
 import 'package:acadeque_student_app/common/ui/tutoring_tutor_widget.dart';
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/tutoring_screen/tabs/stat_screen/stat_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,93 +84,28 @@ class StatScreen extends StatelessWidget {
             height: size * 0.8 - 68,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: ListView(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: const TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                  DividerLine(),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                  DividerLine(),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                  DividerLine(),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                  DividerLine(),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                  DividerLine(),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructorProfileScreen()));
-                    },
-                    child: TutoringTutorWidget(
-                        name: 'Kanishth',
-                        desc:
-                            'CSE Undergrad Student from SRM Institute of Science and Technology Institute of Science and Technology',
-                        price: 25),
-                  ),
-                ],
-              ),
+              child: state.loading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : state.teachersState?.data?.teachers?.isEmpty ?? true
+                      ? const Center(
+                          child: Text("No Teachers"),
+                        )
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: state.teachersState!.data!.teachers!
+                                .map(
+                                  (e) => Column(
+                                    children: [
+                                      TutoringTutorWidget(teacherItem: e),
+                                      sHeightSpan,
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
             ),
           )
         ],
