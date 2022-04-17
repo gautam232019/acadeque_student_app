@@ -1,7 +1,6 @@
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/ask_state.dart';
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AskContainer extends StatelessWidget {
@@ -10,8 +9,6 @@ class AskContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<AskState>(context);
-
     return Column(
       children: [
         Padding(
@@ -19,14 +16,11 @@ class AskContainer extends StatelessWidget {
               const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
           child: InkWell(
             onTap: () {
-              if (state.studentQuestionsState != null) {
-                Navigator.pushNamed(context, "/question_screen",
-                    arguments: item);
-              }
+              Navigator.pushNamed(context, "/question_screen", arguments: item);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   height: 103,
@@ -67,6 +61,7 @@ class AskContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      sHeightSpan,
                       Text(
                         item!.question!,
                         style: const TextStyle(
