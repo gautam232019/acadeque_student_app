@@ -1,5 +1,7 @@
 import 'package:acadeque_student_app/modules/add_question/add_question_screen.dart';
 import 'package:acadeque_student_app/modules/add_question/add_question_state.dart';
+import 'package:acadeque_student_app/modules/confirmation/confiramtion_state.dart';
+import 'package:acadeque_student_app/modules/confirmation/confirmation_screen.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doubt_screen.dart';
 import 'package:acadeque_student_app/modules/login/login_screen.dart';
@@ -73,6 +75,10 @@ class App extends StatelessWidget {
           '/add_question': (context) => ChangeNotifierProvider(
                 create: (_) => AddQuestionState(),
                 child: const AddQuestionScreen(),
+              ),
+          '/confirmation': (context) => ChangeNotifierProvider(
+                create: (_) => ConfirmationState(),
+                child: const ConfirmationScreen(),
               ),
         },
         initialRoute: '/splash',

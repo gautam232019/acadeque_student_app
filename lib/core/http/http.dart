@@ -48,6 +48,13 @@ Dio getHttp() {
     },
     onError: (DioError e, handler) {
       if (e.type == DioErrorType.response) {
+        var kera = e.response.toString();
+        User user = User.fromJson(jsonDecode(kera));
+        final message = user.message!;
+        if (message == "Token expired!") {
+          navigatorKey.currentState!
+              .pushNamedAndRemoveUntil('/login', (route) => false);
+        }
         if (e.response!.statusCode == 401) {
           //Unauthorized
           LocalStorageService().clear(LocalStorageKeys.accessToken);

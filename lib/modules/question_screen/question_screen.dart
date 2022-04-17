@@ -79,10 +79,7 @@ class QuestionScreen extends StatelessWidget {
                               child: CircularProgressIndicator(),
                             )
                           : QuestionWidget(
-                              question: state.item!.question!,
-                              answer: state.item!.solved == true
-                                  ? "Answers"
-                                  : "Not solved",
+                              questionItem: state.item!,
                             ),
                     ))
               ],
