@@ -12,6 +12,7 @@ class TutorProfile extends StatefulWidget {
 
 class _TutorProfileState extends State<TutorProfile> {
   Future fetchTeachers() async {}
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,11 +1,16 @@
 import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
+import 'package:acadeque_student_app/modules/notifications/notification_state.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:provider/provider.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<NotificationState>(context);
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -67,127 +72,104 @@ class NotificationScreen extends StatelessWidget {
                   ],
                 ),
                 lHeightSpan,
-                Row(
-                  children: const [
-                    lWidthSpan,
-                    Text(
-                      "Today",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+                // Row(
+                //   children: const [
+                //     lWidthSpan,
+                //     Text(
+                //       "Today",
+                //       style: TextStyle(
+                //         fontSize: 12,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                mHeightSpan,
+                lHeightSpan,
+                Expanded(
+                  child: Container(
+                    child: state.loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : state.notificationState?.data?.notifications
+                                    ?.isEmpty ??
+                                true
+                            ? const Center(
+                                child: Text("No notifications!"),
+                              )
+                            : Column(
+                                children: state
+                                    .notificationState!.data!.notifications!
+                                    .map((e) {
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          lWidthSpan,
+                                          const CircleAvatar(
+                                            backgroundColor: Colors.blue,
+                                            radius: 30,
+                                          ),
+                                          sWidthSpan,
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                sHeightSpan,
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Admin",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    sWidthSpan,
+                                                    Column(
+                                                      children: [
+                                                        sHeightSpan,
+                                                        Text(
+                                                          Jiffy(e.createdAt)
+                                                              .fromNow(),
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 9,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                sHeightSpan,
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        e.message!,
+                                                        overflow: TextOverflow
+                                                            .visible,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const Divider()
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                  ),
                 ),
                 mHeightSpan,
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    lWidthSpan,
-                    const CircleAvatar(
-                      backgroundColor: Colors.red,
-                      radius: 30,
-                    ),
-                    sWidthSpan,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          sHeightSpan,
-                          Row(
-                            children: [
-                              const Text(
-                                "Admin",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              sWidthSpan,
-                              Column(
-                                children: const [
-                                  sHeightSpan,
-                                  Text(
-                                    "2h 47m ago",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          sHeightSpan,
-                          Row(
-                            children: const [
-                              Expanded(
-                                child: Text(
-                                  "kear khau sdklfaljfsld fjal;fjdskflajsfk jsdaf;ldksjf adsl;jfsa;flkjsd;flk jsafkl;djs fa;fjsdf ",
-                                  overflow: TextOverflow.visible,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    lWidthSpan,
-                    const CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 30,
-                    ),
-                    sWidthSpan,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          sHeightSpan,
-                          Row(
-                            children: [
-                              const Text(
-                                "Tutor",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              sWidthSpan,
-                              Column(
-                                children: const [
-                                  sHeightSpan,
-                                  Text(
-                                    "2h 47m ago",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          sHeightSpan,
-                          Row(
-                            children: const [
-                              Expanded(
-                                child: Text(
-                                  "kear khau sdklfaljfsld fjal;fjdskflajsfk jsdaf;ldksjf adsl;jfsa;flkjsd;flk jsafkl;djs fa;fjsdf ",
-                                  overflow: TextOverflow.visible,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                )
               ],
             )
           ],

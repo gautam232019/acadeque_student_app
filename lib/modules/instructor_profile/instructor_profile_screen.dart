@@ -114,11 +114,8 @@ class InstructorProfileScreen extends StatelessWidget {
                             Center(
                               child: InkWell(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             BookAppontmentScreen()));
+                                  Navigator.pushNamed(
+                                      context, "/book_appointment");
                                 },
                                 child: Container(
                                   child: const Center(

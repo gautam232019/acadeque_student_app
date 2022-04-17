@@ -41,6 +41,7 @@ dependencies:
   jwt_decode: ^0.3.1
   jiffy: ^5.0.0
   image_picker: ^0.8.5
+  calendar_timeline: ^1.0.4
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:acadeque_student_app/modules/add_question/add_question_screen.dart';
 import 'package:acadeque_student_app/modules/add_question/add_question_state.dart';
+import 'package:acadeque_student_app/modules/book_appointment_screen/book_appointment_screen.dart';
+import 'package:acadeque_student_app/modules/book_appointment_screen/book_appointment_state.dart';
 import 'package:acadeque_student_app/modules/confirmation/confiramtion_state.dart';
 import 'package:acadeque_student_app/modules/confirmation/confirmation_screen.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
@@ -85,6 +87,10 @@ class App extends StatelessWidget {
           '/instructor_profile': (context) => ChangeNotifierProvider(
                 create: (_) => InstructorProfileState(context),
                 child: const InstructorProfileScreen(),
+              ),
+          '/book_appointment': (context) => ChangeNotifierProvider(
+                create: (_) => BookAppointmentState(),
+                child: const BookAppointmentScreen(),
               ),
         },
         initialRoute: '/splash',
