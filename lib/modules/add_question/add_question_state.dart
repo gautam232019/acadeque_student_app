@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:acadeque_student_app/core/http/http.dart';
@@ -5,6 +6,7 @@ import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/add_question/models/subject_response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddQuestionState extends BaseState {
@@ -34,20 +36,20 @@ class AddQuestionState extends BaseState {
     notifyListeners();
   }
 
-  onSubmit() async {
+  onSubmit(context) async {
     onQuestionLoading(true);
     if (subject != null && question.isNotEmpty && imagefile != null) {
       try {
-        var data = {
+        var data = FormData.fromMap({
           "question": question,
           "subjectId": subject,
-          "media": imagefile!.path,
-        };
-        // print(data);
-        final response = await dio.post("/questions", data: data);
-        print(response.data);
+          "media": await MultipartFile.fromFile(imagefile!.path)
+        });
+        await dio.post("/questions", data: data);
+        ToastService().s("Question uploaded successfully!");
+        Navigator.pop(context, "refresh");
       } catch (err) {
-        print(err);
+        // print(err);
       }
     } else {
       ToastService().w("Please fill all fields!");

@@ -94,10 +94,8 @@ class AskScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           onPressed: () async {
             final result = await Navigator.pushNamed(context, "/add_question");
-            if (result == null) {
-              print("kei garena");
-            } else {
-              print("question halyo");
+            if (result != null) {
+              state.getQuestions();
             }
           },
           // backgroundColor: colorBox,

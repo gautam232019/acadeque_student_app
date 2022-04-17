@@ -247,7 +247,7 @@ class AddQuestionScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                state.onSubmit();
+                                state.onSubmit(context);
                                 // Navigator.push(
                                 //     context,
                                 //     MaterialPageRoute(
