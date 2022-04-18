@@ -42,7 +42,7 @@ class Student {
   String? sId;
   String? name;
   String? email;
-  int? contact;
+  dynamic contact;
 
   Student({this.sId, this.name, this.email, this.contact});
 
@@ -50,7 +50,7 @@ class Student {
     sId = json['_id'];
     name = json['name'];
     email = json['email'];
-    contact = json['contact'] ?? "";
+    contact = json['contact'] != null ? json['contact'].toString() : "";
   }
 
   Map<String, dynamic> toJson() {

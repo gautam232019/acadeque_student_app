@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ProfileState>(context);
-    onTextEdit(String field, String? value) {
+    onTextEdit(String field, dynamic? value) {
       return showDialog<bool>(
         context: context,
         barrierDismissible: true, // user must tap button!
@@ -120,14 +120,16 @@ class ProfileScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    state.userDetailState!.data!.student!.name!,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  // Text(
+                                  //   state.userDetailState?.data?.student!
+                                  //           .name ??
+                                  //       "",
+                                  //   style: const TextStyle(
+                                  //       color: Colors.white,
+                                  //       fontSize: 18,
+                                  //       fontFamily: 'Roboto',
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
                                   const SizedBox(
                                     height: 12,
                                   ),
@@ -185,37 +187,42 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    state.onChange(
-                                        "name",
-                                        state.userDetailState!.data!.student!
-                                            .name!);
-                                    state.onChange(
-                                        "email",
-                                        state.userDetailState!.data!.student!
-                                            .email!);
-                                    state.onChange(
-                                        "contact",
-                                        state.userDetailState!.data!.student!
-                                                .contact ??
-                                            "");
-                                    onTextEdit(
-                                        "name",
-                                        state.userDetailState!.data!.student!
-                                            .name!);
+                                    // state.onChange(
+                                    //     "name",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .name ??
+                                    //         "");
+                                    // state.onChange(
+                                    //     "email",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .email ??
+                                    //         "");
+                                    // state.onChange(
+                                    //     "contact",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .contact ??
+                                    //         "");
+                                    // onTextEdit(
+                                    //     "name",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .name ??
+                                    //         "");
                                   },
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/name_icon.svg',
                                     title: 'Name',
-                                    value: state
-                                        .userDetailState!.data!.student!.name!,
+                                    value: state.userDetailState?.data?.student!
+                                            .name ??
+                                        "",
                                   ),
                                 ),
                                 DividerLine(),
                                 ProfileRow(
                                   iconPath: 'assets/svg/email_icon.svg',
                                   title: 'E-mail',
-                                  value: state
-                                      .userDetailState!.data!.student!.email!,
+                                  value: state.userDetailState?.data?.student!
+                                          .email ??
+                                      "",
                                 ),
                                 DividerLine(),
                                 const ProfileRow(
@@ -229,11 +236,13 @@ class ProfileScreen extends StatelessWidget {
                                     state.onChange(
                                         "name",
                                         state.userDetailState!.data!.student!
-                                            .name!);
+                                                .name ??
+                                            "");
                                     state.onChange(
                                         "email",
                                         state.userDetailState!.data!.student!
-                                            .email!);
+                                                .email ??
+                                            "");
                                     state.onChange(
                                         "contact",
                                         state.userDetailState!.data!.student!
@@ -249,10 +258,8 @@ class ProfileScreen extends StatelessWidget {
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/contact_icon.svg',
                                     title: 'Contact Number',
-                                    value: state.userDetailState!.data!.student
-                                            ?.contact
-                                            .toString() ??
-                                        "",
+                                    value: state.userDetailState?.data?.student
+                                        ?.contact,
                                   ),
                                 ),
                                 DividerLine(),

@@ -86,13 +86,18 @@ class ProfileState extends BaseState {
   }
 
   getUserDetail() async {
+    print("yo id ho$id");
     if (id.isNotEmpty) {
       try {
         final response = await dio.get("/students/$id");
+        print("hello");
         userDetailState = userDetailResponse.fromJson(response.data);
+        print(response.data);
         notifyListeners();
         // ignore: empty_catches
-      } catch (err) {}
+      } catch (err) {
+        print(err);
+      }
     }
     setLoading(false);
   }
