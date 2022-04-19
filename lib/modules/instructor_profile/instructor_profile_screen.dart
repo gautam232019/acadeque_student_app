@@ -115,7 +115,13 @@ class InstructorProfileScreen extends StatelessWidget {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.pushNamed(
-                                      context, "/book_appointment");
+                                      context, "/book_appointment",
+                                      arguments: {
+                                        "id": state.teacherProfileState!.data!
+                                            .teacher!.sId!,
+                                        "name": state.teacherProfileState!.data!
+                                            .teacher!.name!,
+                                      });
                                 },
                                 child: Container(
                                   child: const Center(

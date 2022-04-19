@@ -89,7 +89,7 @@ class App extends StatelessWidget {
                 child: const InstructorProfileScreen(),
               ),
           '/book_appointment': (context) => ChangeNotifierProvider(
-                create: (_) => BookAppointmentState(),
+                create: (_) => BookAppointmentState(context),
                 child: const BookAppointmentScreen(),
               ),
         },
