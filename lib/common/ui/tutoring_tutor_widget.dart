@@ -44,15 +44,24 @@ class TutoringTutorWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "25/hr",
-                      // '\$' + price.toString() + '/hr',
-                      style: const TextStyle(
-                          color: primaryColor,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13),
-                    )
+                    if (teacherItem.hourlyRate != null)
+                      Text(
+                        '\$${teacherItem.hourlyRate} /hr',
+                        style: const TextStyle(
+                            color: primaryColor,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13),
+                      )
+                    else
+                      const Text(
+                        'Rate not found',
+                        style: TextStyle(
+                            color: primaryColor,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13),
+                      )
                   ],
                 ),
                 Row(
