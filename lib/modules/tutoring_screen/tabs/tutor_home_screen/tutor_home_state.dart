@@ -1,6 +1,7 @@
 import 'package:acadeque_student_app/common/utils/debouncer.dart';
 import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/services/local_storage_service.dart';
+import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/models/user_detail_response.dart';
@@ -33,7 +34,12 @@ class TutorHomeState extends BaseState {
         final response = await dio.get("/subjects?name[regex]=$searchValue");
         searchState = searchResponse.fromJson(response.data);
         notifyListeners();
-        fetchTeacherWithSubject(searchState!.data!.subjects![0].sId!);
+        if (searchState!.data!.subjects!.isNotEmpty) {
+          fetchTeacherWithSubject(searchState!.data!.subjects![0].sId!);
+        } else {
+          ToastService().e("Subject not found!");
+          getTeachers();
+        }
         // ignore: empty_catches
       } catch (err) {}
     } else {
