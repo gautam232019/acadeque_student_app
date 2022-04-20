@@ -106,7 +106,14 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 30),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            final result = await Navigator.pushNamed(
+                                context, "/add_question");
+                            if (result != null) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/doubt', (route) => false);
+                            }
+                          },
                           child: Container(
                             child: const Center(
                               child: Text(

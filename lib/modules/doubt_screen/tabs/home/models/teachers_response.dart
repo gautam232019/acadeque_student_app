@@ -1,6 +1,6 @@
 class TeachersResponse {
   String? status;
-  int? result;
+  num? result;
   Data? data;
 
   TeachersResponse({this.status, this.result, this.data});
@@ -48,71 +48,104 @@ class Data {
 class Teachers {
   String? sId;
   String? name;
+  String? authProvider;
   String? role;
   String? email;
   String? work;
-  // List<Null>? subjects;
-  int? avgRating;
+  List<String>? subjects;
+  num? hourlyRate;
+  num? minuteRate;
+  num? avgRating;
   bool? enableInstantSession;
   bool? disabled;
+  bool? approved;
   String? createdAt;
-  int? iV;
+  num? iV;
   String? description;
-  int? hourlyRate;
+  Experience? experience;
+  num? students;
 
   Teachers(
       {this.sId,
       this.name,
+      this.authProvider,
       this.role,
       this.email,
       this.work,
-      // this.subjects,
+      this.subjects,
+      this.hourlyRate,
+      this.minuteRate,
       this.avgRating,
       this.enableInstantSession,
       this.disabled,
+      this.approved,
       this.createdAt,
       this.iV,
       this.description,
-      this.hourlyRate});
+      this.experience,
+      this.students});
 
   Teachers.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
+    authProvider = json['authProvider'];
     role = json['role'];
     email = json['email'];
     work = json['work'];
-    // if (json['subjects'] != null) {
-    //   subjects = <Null>[];
-    //   json['subjects'].forEach((v) {
-    //     subjects!.add(new Null.fromJson(v));
-    //   });
-    // }
+    subjects = json['subjects'].cast<String>();
+    hourlyRate = json['hourlyRate'];
+    minuteRate = json['minuteRate'];
     avgRating = json['avgRating'];
     enableInstantSession = json['enableInstantSession'];
     disabled = json['disabled'];
+    approved = json['approved'];
     createdAt = json['createdAt'];
     iV = json['__v'];
     description = json['description'];
-    hourlyRate = json['hourlyRate'];
+    experience = json['experience'] != null
+        ? new Experience.fromJson(json['experience'])
+        : null;
+    students = json['students'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['name'] = this.name;
+    data['authProvider'] = this.authProvider;
     data['role'] = this.role;
     data['email'] = this.email;
     data['work'] = this.work;
-    // if (this.subjects != null) {
-    //   data['subjects'] = this.subjects!.map((v) => v.toJson()).toList();
-    // }
+    data['subjects'] = this.subjects;
+    data['hourlyRate'] = this.hourlyRate;
+    data['minuteRate'] = this.minuteRate;
     data['avgRating'] = this.avgRating;
     data['enableInstantSession'] = this.enableInstantSession;
     data['disabled'] = this.disabled;
+    data['approved'] = this.approved;
     data['createdAt'] = this.createdAt;
     data['__v'] = this.iV;
     data['description'] = this.description;
-    data['hourlyRate'] = this.hourlyRate;
+    if (this.experience != null) {
+      data['experience'] = this.experience!.toJson();
+    }
+    data['students'] = this.students;
+    return data;
+  }
+}
+
+class Experience {
+  String? numberDecimal;
+
+  Experience({this.numberDecimal});
+
+  Experience.fromJson(Map<String, dynamic> json) {
+    numberDecimal = json['$numberDecimal'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['$numberDecimal'] = this.numberDecimal;
     return data;
   }
 }

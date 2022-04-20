@@ -86,8 +86,9 @@ class InstructorProfileScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    state.teacherProfileState!.data!.teacher!
-                                        .name!,
+                                    state.teacherProfileState?.data?.teacher!
+                                            .name ??
+                                        "",
                                     style: const TextStyle(
                                         fontFamily: 'Roboto',
                                         fontSize: 24,
@@ -187,9 +188,10 @@ class InstructorProfileScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        state.teacherProfileState!.data!
-                                            .teacher!.avgRating!
-                                            .toString(),
+                                        state.teacherProfileState?.data!.teacher
+                                                ?.avgRating
+                                                .toString() ??
+                                            "0",
                                         style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Roboto',
@@ -280,7 +282,7 @@ class InstructorProfileScreen extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              state.teacherProfileState!.data!.teacher!
+                              state.teacherProfileState?.data?.teacher!
                                       .description ??
                                   "No descripttion",
                               style: const TextStyle(
