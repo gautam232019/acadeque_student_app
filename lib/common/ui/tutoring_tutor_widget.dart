@@ -98,7 +98,7 @@ class TutoringTutorWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "SOme description",
+                        teacherItem.description ?? "No description",
                         overflow: TextOverflow.visible,
                         style: const TextStyle(
                           fontSize: 10,

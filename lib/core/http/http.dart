@@ -40,7 +40,6 @@ Dio getHttp() {
       if (token.isNotEmpty) {
         options.headers['token'] = token;
       }
-
       return handler.next(options);
     },
     onResponse: (response, handler) {

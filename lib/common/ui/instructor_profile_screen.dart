@@ -51,10 +51,10 @@ class _InstructorProfileScreenState extends State<InstructorProfileScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black45,
-                        offset: const Offset(
+                        offset: Offset(
                           5.0,
                           5.0,
                         ),

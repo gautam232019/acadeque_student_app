@@ -1,5 +1,4 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
-import 'package:acadeque_student_app/common/ui/divider_line.dart';
 import 'package:acadeque_student_app/common/ui/tutoring_tutor_widget.dart';
 import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/tutoring_screen/tabs/stat_screen/stat_state.dart';
