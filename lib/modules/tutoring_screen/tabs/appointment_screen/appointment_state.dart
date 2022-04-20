@@ -2,6 +2,7 @@ import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/services/local_storage_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
+import 'package:acadeque_student_app/modules/tutoring_screen/tabs/appointment_screen/models/appointment_response.dart';
 import 'package:dio/dio.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -19,7 +20,7 @@ class AppointmentState extends BaseState {
   String? questin;
   String? ans;
 
-  StudentQuestionResponse? studentQuestionsState;
+  AppointmentResponse? appointmentState;
   getToken() {
     setLoading(true);
     token = LocalStorageService().read(LocalStorageKeys.accessToken) ?? "";
@@ -36,7 +37,7 @@ class AppointmentState extends BaseState {
     try {
       // print("yo token ho $id");
       final response = await dio.get("/appointments");
-      studentQuestionsState = StudentQuestionResponse.fromJson(response.data);
+      appointmentState = AppointmentResponse.fromJson(response.data);
       notifyListeners();
       // ignore: empty_catches
     } catch (err) {}

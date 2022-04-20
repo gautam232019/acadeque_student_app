@@ -6,6 +6,7 @@ import 'package:acadeque_student_app/common/utils/colors_util.dart';
 import 'package:acadeque_student_app/modules/instructor_profile/instructor_profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
 class InstructorProfileScreen extends StatelessWidget {
@@ -217,16 +218,18 @@ class InstructorProfileScreen extends StatelessWidget {
                                   width: 103,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
+                                    children: [
                                       Text(
-                                        '14 Years',
-                                        style: TextStyle(
+                                        state.teacherProfileState?.data?.teacher
+                                                ?.experience?.numberDecimal ??
+                                            "0",
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Roboto',
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(
+                                      const Text(
                                         'Experience',
                                         style: TextStyle(
                                             fontSize: 12,
@@ -245,16 +248,19 @@ class InstructorProfileScreen extends StatelessWidget {
                                   width: 103,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
+                                    children: [
                                       Text(
-                                        '560',
-                                        style: TextStyle(
+                                        state.teacherProfileState?.data?.teacher
+                                                ?.students
+                                                .toString() ??
+                                            "0",
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Roboto',
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(
+                                      const Text(
                                         ' Students',
                                         style: TextStyle(
                                             fontSize: 12,
@@ -326,20 +332,32 @@ class InstructorProfileScreen extends StatelessWidget {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(left: 16, top: 10),
-                                child: Row(children: [
-                                  Image.asset('assets/images/64.png'),
-                                  const SizedBox(
-                                    width: 14,
-                                  ),
-                                  const Text(
-                                    'Students Satisfied',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'Roboto'),
-                                  ),
-                                ]),
+                                child: Row(
+                                  children: [
+                                    // Image.asset('assets/images/64.png'),
+                                    if (state.studentFeedBackState!.data!
+                                        .satisfactions!.isEmpty)
+                                      const CircleAvatar(
+                                        child: Text("0%"),
+                                      )
+                                    else
+                                      CircleAvatar(
+                                        child: Text(
+                                            "${state.studentFeedBackState!.data!.satisfactions![0].percentage!.toString()} %"),
+                                      ),
+                                    const SizedBox(
+                                      width: 14,
+                                    ),
+                                    const Text(
+                                      'Students Satisfied',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                          fontFamily: 'Roboto'),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -401,14 +419,21 @@ class InstructorProfileScreen extends StatelessWidget {
                               height: 15,
                             ),
                             const RatingRowWidget(
-                                title: 'Very Satisfied', count: 578),
+                                title: 'Very Satisfied', count: 0),
                             DividerLine(),
-                            const RatingRowWidget(
-                                title: 'Satisfied ', count: 578),
+                            if (state.studentFeedBackState!.data!.satisfactions!
+                                .isNotEmpty)
+                              RatingRowWidget(
+                                  title: 'Satisfied ',
+                                  count: state.studentFeedBackState!.data!
+                                      .satisfactions![0].students!)
+                            else
+                              const RatingRowWidget(
+                                  title: 'Satisfied ', count: 0),
                             DividerLine(),
-                            const RatingRowWidget(title: 'Neutral', count: 578),
+                            const RatingRowWidget(title: 'Neutral', count: 0),
                             DividerLine(),
-                            const RatingRowWidget(title: 'Poor', count: 578),
+                            const RatingRowWidget(title: 'Poor', count: 0),
                             DividerLine(),
                             const SizedBox(
                               height: 30,
@@ -454,172 +479,278 @@ class InstructorProfileScreen extends StatelessWidget {
                             SizedBox(
                               height: 167,
                               width: 375,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: colorBox),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 34,
-                                            width: 34,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.white),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                  'John Wick',
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.white),
-                                                ),
-                                                SizedBox(
-                                                  width: 150,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: const [
-                                                      Expanded(
-                                                        child: Text(
-                                                          'This is so amazing! I really enjoyed the session. I had all my doubts cleared.',
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                              fontFamily:
-                                                                  'Roboto',
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const Text(
-                                                  '2 days ago',
-                                                  style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.white),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    height: 151,
-                                    width: 230,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: colorBox),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 34,
-                                            width: 34,
-                                            decoration: BoxDecoration(
+                              child: state.teacherReviewState?.data?.reviews
+                                          ?.isEmpty ??
+                                      true
+                                  ? const Center(
+                                      child: Text('No Reviews found!'))
+                                  : ListView.builder(
+                                      itemCount: state.teacherReviewState!.data!
+                                          .reviews!.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: ((context, index) {
+                                        final item = state.teacherReviewState!
+                                            .data!.reviews![index];
+                                        return Container(
+                                          decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(50),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                  BorderRadius.circular(8),
+                                              color: colorBox),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const Text(
-                                                  'Sania Ray',
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontFamily: 'Roboto',
+                                                Container(
+                                                  height: 34,
+                                                  width: 34,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
                                                       color: Colors.white),
                                                 ),
-                                                SizedBox(
-                                                  width: 150,
-                                                  child: Row(
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
-                                                    children: const [
-                                                      Expanded(
-                                                        child: Text(
-                                                          'This is so amazing! I really enjoyed the session. I had all my doubts cleared.',
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                              fontFamily:
-                                                                  'Roboto',
-                                                              color:
-                                                                  Colors.white),
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        item.studentId!.name!,
+                                                        style: const TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 150,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Text(
+                                                                item.feedback!,
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontFamily:
+                                                                        'Roboto',
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
+                                                      ),
+                                                      Text(
+                                                        Jiffy(item.createdAt!)
+                                                            .fromNow(),
+                                                        style: const TextStyle(
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            color:
+                                                                Colors.white),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                const Text(
-                                                  '4 days ago',
-                                                  style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.white),
-                                                ),
+                                                )
                                               ],
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    height: 151,
-                                    width: 230,
-                                  ),
-                                ],
-                              ),
+                                          ),
+                                          height: 151,
+                                          width: 230,
+                                        );
+                                      })),
                             ),
+                            // SizedBox(
+                            //   height: 167,
+                            //   width: 375,
+                            //   child: ListView(
+                            //     scrollDirection: Axis.horizontal,
+                            //     children: [
+                            //       Container(
+                            //         decoration: BoxDecoration(
+                            //             borderRadius: BorderRadius.circular(8),
+                            //             color: colorBox),
+                            //         child: Padding(
+                            //           padding: const EdgeInsets.all(12.0),
+                            //           child: Row(
+                            //             crossAxisAlignment:
+                            //                 CrossAxisAlignment.start,
+                            //             children: [
+                            //               Container(
+                            //                 height: 34,
+                            //                 width: 34,
+                            //                 decoration: BoxDecoration(
+                            //                     borderRadius:
+                            //                         BorderRadius.circular(50),
+                            //                     color: Colors.white),
+                            //               ),
+                            //               Padding(
+                            //                 padding: const EdgeInsets.all(8.0),
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment
+                            //                           .spaceBetween,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     const Text(
+                            //                       'John Wick',
+                            //                       style: TextStyle(
+                            //                           fontSize: 14,
+                            //                           fontWeight:
+                            //                               FontWeight.bold,
+                            //                           fontFamily: 'Roboto',
+                            //                           color: Colors.white),
+                            //                     ),
+                            //                     SizedBox(
+                            //                       width: 150,
+                            //                       child: Row(
+                            //                         mainAxisAlignment:
+                            //                             MainAxisAlignment
+                            //                                 .spaceBetween,
+                            //                         children: const [
+                            //                           Expanded(
+                            //                             child: Text(
+                            //                               'This is so amazing! I really enjoyed the session. I had all my doubts cleared.',
+                            //                               style: TextStyle(
+                            //                                   fontSize: 12,
+                            //                                   fontWeight:
+                            //                                       FontWeight
+                            //                                           .normal,
+                            //                                   fontFamily:
+                            //                                       'Roboto',
+                            //                                   color:
+                            //                                       Colors.white),
+                            //                             ),
+                            //                           ),
+                            //                         ],
+                            //                       ),
+                            //                     ),
+                            //                     const Text(
+                            //                       '2 days ago',
+                            //                       style: TextStyle(
+                            //                           fontSize: 10,
+                            //                           fontWeight:
+                            //                               FontWeight.normal,
+                            //                           fontFamily: 'Roboto',
+                            //                           color: Colors.white),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         ),
+                            //         height: 151,
+                            //         width: 230,
+                            //       ),
+                            //       const SizedBox(
+                            //         width: 10,
+                            //       ),
+                            //       Container(
+                            //         decoration: BoxDecoration(
+                            //             borderRadius: BorderRadius.circular(8),
+                            //             color: colorBox),
+                            //         child: Padding(
+                            //           padding: const EdgeInsets.all(12.0),
+                            //           child: Row(
+                            //             crossAxisAlignment:
+                            //                 CrossAxisAlignment.start,
+                            //             children: [
+                            //               Container(
+                            //                 height: 34,
+                            //                 width: 34,
+                            //                 decoration: BoxDecoration(
+                            //                   borderRadius:
+                            //                       BorderRadius.circular(50),
+                            //                   color: Colors.white,
+                            //                 ),
+                            //               ),
+                            //               Padding(
+                            //                 padding: const EdgeInsets.all(8.0),
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment
+                            //                           .spaceBetween,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     const Text(
+                            //                       'Sania Ray',
+                            //                       style: TextStyle(
+                            //                           fontSize: 14,
+                            //                           fontWeight:
+                            //                               FontWeight.bold,
+                            //                           fontFamily: 'Roboto',
+                            //                           color: Colors.white),
+                            //                     ),
+                            //                     SizedBox(
+                            //                       width: 150,
+                            //                       child: Row(
+                            //                         mainAxisAlignment:
+                            //                             MainAxisAlignment
+                            //                                 .spaceBetween,
+                            //                         children: const [
+                            //                           Expanded(
+                            //                             child: Text(
+                            //                               'This is so amazing! I really enjoyed the session. I had all my doubts cleared.',
+                            //                               style: TextStyle(
+                            //                                   fontSize: 12,
+                            //                                   fontWeight:
+                            //                                       FontWeight
+                            //                                           .normal,
+                            //                                   fontFamily:
+                            //                                       'Roboto',
+                            //                                   color:
+                            //                                       Colors.white),
+                            //                             ),
+                            //                           ),
+                            //                         ],
+                            //                       ),
+                            //                     ),
+                            //                     const Text(
+                            //                       '4 days ago',
+                            //                       style: TextStyle(
+                            //                           fontSize: 10,
+                            //                           fontWeight:
+                            //                               FontWeight.normal,
+                            //                           fontFamily: 'Roboto',
+                            //                           color: Colors.white),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         ),
+                            //         height: 151,
+                            //         width: 230,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             const SizedBox(
                               height: 10,
                             ),

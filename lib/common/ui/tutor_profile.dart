@@ -16,9 +16,11 @@ class _TutorProfileState extends State<TutorProfile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/instructor_profile", arguments: {
-          'id': widget.teacherItem!.sId,
-        });
+        if (widget.teacherItem!.sId != null) {
+          Navigator.pushNamed(context, "/instructor_profile", arguments: {
+            'id': widget.teacherItem!.sId,
+          });
+        }
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

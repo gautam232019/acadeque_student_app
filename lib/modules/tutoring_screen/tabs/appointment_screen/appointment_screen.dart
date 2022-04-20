@@ -1,4 +1,5 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
+import 'package:acadeque_student_app/common/ui/appointment_item.dart';
 import 'package:acadeque_student_app/common/ui/ask_container.dart';
 import 'package:acadeque_student_app/modules/tutoring_screen/tabs/appointment_screen/appointment_state.dart';
 import 'package:flutter/material.dart';
@@ -67,16 +68,15 @@ class AppointmentScreen extends StatelessWidget {
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : state.studentQuestionsState?.data?.questions?.isEmpty ??
-                          true
+                  : state.appointmentState?.data?.appointments?.isEmpty ?? true
                       ? const Center(
                           child: Text("No Appointments"),
                         )
                       : SingleChildScrollView(
                           child: Column(
                             children: state
-                                .studentQuestionsState!.data!.questions!
-                                .map((e) => AskContainer(item: e))
+                                .appointmentState!.data!.appointments!
+                                .map((e) => AppointmentItem(item: e))
                                 .toList(),
                           ),
                         ),
