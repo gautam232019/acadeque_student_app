@@ -86,8 +86,11 @@ class TutorHomeScreen extends StatelessWidget {
                             ],
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.white),
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextField(
+                          onChanged: (val) {
+                            state.searchDebouncer.value = val;
+                          },
+                          decoration: const InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
