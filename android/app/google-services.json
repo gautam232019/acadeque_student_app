@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "269668470765",
+    "project_id": "acadque-2c7a4",
+    "storage_bucket": "acadque-2c7a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269668470765:android:f38ee6652c8e2b5a4561e4",
+        "android_client_info": {
+          "package_name": "com.example.acadeque_student_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269668470765-4gnovou6n34e3cmgba112vba1uov8b3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGg51mTZN-HuoN9LDF2XGuOlaLwgpq6QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269668470765-4gnovou6n34e3cmgba112vba1uov8b3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
