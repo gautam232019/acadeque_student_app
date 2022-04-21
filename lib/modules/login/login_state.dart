@@ -18,8 +18,23 @@ class LoginState extends BaseState {
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
       if (googleAuth == null) return;
-      print("yo token ho");
+
+      print("kera");
       print(googleAuth.idToken);
+      print("lamo");
+      print(googleAuth.accessToken);
+
+      // final GoogleSignInAuthentication googlaAuth =
+      //     await googleUser!.authentication;
+
+      // final credential = GoogleAuthProvider.credential(
+      //   accessToken: googlaAuth.accessToken,
+      //   idToken: googlaAuth.idToken,
+      // );
+      // final response =
+      //     await FirebaseAuth.instance.signInWithCredential(credential);
+      // print("yo response ho");
+      // print(response.credential);
       // ignore: empty_catches
     } catch (err) {
       print(err);
