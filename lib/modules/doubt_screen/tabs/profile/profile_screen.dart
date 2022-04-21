@@ -187,26 +187,26 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    // state.onChange(
-                                    //     "name",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .name ??
-                                    //         "");
-                                    // state.onChange(
-                                    //     "email",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .email ??
-                                    //         "");
-                                    // state.onChange(
-                                    //     "contact",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .contact ??
-                                    //         "");
-                                    // onTextEdit(
-                                    //     "name",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .name ??
-                                    //         "");
+                                    state.onChange(
+                                        "name",
+                                        state.userDetailState!.data!.student!
+                                                .name ??
+                                            "");
+                                    state.onChange(
+                                        "email",
+                                        state.userDetailState!.data!.student!
+                                                .email ??
+                                            "");
+                                    state.onChange(
+                                        "contact",
+                                        state.userDetailState!.data!.student!
+                                                .contact ??
+                                            "");
+                                    onTextEdit(
+                                        "name",
+                                        state.userDetailState!.data!.student!
+                                                .name ??
+                                            "");
                                   },
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/name_icon.svg',
