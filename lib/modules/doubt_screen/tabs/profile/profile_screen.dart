@@ -101,6 +101,7 @@ class ProfileScreen extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+<<<<<<< Updated upstream
                               sWidthSpan,
                               Stack(
                                 children: [
@@ -168,6 +169,108 @@ class ProfileScreen extends StatelessWidget {
                               //             'assets/svg/camera_icon.svg'))
                               //   ],
                               // ),
+=======
+                              mWidthSpan,
+                              InkWell(
+                                onTap: () {
+                                  showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SizedBox(
+                                          height: 200,
+                                          child: Column(
+                                            children: [
+                                              sHeightSpan,
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: const [
+                                                  Text(
+                                                    "Choose one",
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const Divider(),
+                                              sHeightSpan,
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                      state.pickFromCamera(
+                                                          context);
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.camera,
+                                                      size: 80,
+                                                    ),
+                                                  ),
+                                                  sWidthSpan,
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                      state.pickFromGallery(
+                                                          context);
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.photo_album,
+                                                      size: 80,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: Stack(
+                                  children: [
+                                    if (state.userDetailState!.data!.student!
+                                        .profileURL!.isNotEmpty)
+                                      Container(
+                                        height: 80,
+                                        width: 80,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Image.network(
+                                            state.userDetailState!.data!
+                                                .student!.profileURL!,
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                          ),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: Colors.transparent,
+                                        ),
+                                      )
+                                    else
+                                      SvgPicture.asset(
+                                        'assets/svg/image_thumbnail.svg',
+                                        height: 110,
+                                        width: 110,
+                                        color: Colors.white,
+                                      ),
+                                    Positioned(
+                                        top: 55,
+                                        left: 30,
+                                        child: SvgPicture.asset(
+                                            'assets/svg/camera_icon.svg'))
+                                  ],
+                                ),
+                              ),
+                              mWidthSpan,
+>>>>>>> Stashed changes
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,32 +288,38 @@ class ProfileScreen extends StatelessWidget {
                                   const SizedBox(
                                     height: 12,
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.white),
-                                    child: Center(
-                                        child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 2),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.add,
-                                            size: 20,
-                                            color: Color(0xFF0EB9B8),
-                                          ),
-                                          Text(
-                                            'Get Help Now',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 12,
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    )),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: Colors.white),
+                                      child: Center(
+                                          child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 2),
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              Icons.add,
+                                              size: 20,
+                                              color: Color(0xFF0EB9B8),
+                                            ),
+                                            Text(
+                                              'Get Help Now',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 12,
+                                                  fontFamily: 'Roboto',
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                    ),
                                   )
                                 ],
                               )
@@ -311,8 +420,12 @@ class ProfileScreen extends StatelessWidget {
                                     iconPath: 'assets/svg/contact_icon.svg',
                                     title: 'Contact Number',
                                     value: state.userDetailState?.data?.student
+<<<<<<< Updated upstream
                                             ?.contact
                                             .toString() ??
+=======
+                                            ?.contact ??
+>>>>>>> Stashed changes
                                         "N/A",
                                   ),
                                 ),

@@ -42,7 +42,11 @@ class Student {
   String? sId;
   String? name;
   String? email;
+<<<<<<< Updated upstream
   int? contact;
+=======
+  String? contact;
+>>>>>>> Stashed changes
   String? profileURL;
 
   Student({this.sId, this.name, this.email, this.contact, this.profileURL});
@@ -51,8 +55,13 @@ class Student {
     sId = json['_id'];
     name = json['name'];
     email = json['email'];
+<<<<<<< Updated upstream
     contact = json['contact'];
     profileURL = json['profileURL'];
+=======
+    contact = json['contact'] != null ? json['contact'].toString() : "";
+    profileURL = json['profileURL'] ?? "";
+>>>>>>> Stashed changes
   }
 
   Map<String, dynamic> toJson() {
@@ -61,7 +70,11 @@ class Student {
     data['name'] = this.name;
     data['email'] = this.email;
     data['contact'] = this.contact;
+<<<<<<< Updated upstream
     data['profileURL'] = this.profileURL ?? "";
+=======
+    data['profileURL'] = this.profileURL;
+>>>>>>> Stashed changes
     return data;
   }
 }
