@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/services/local_storage_service.dart';
 import 'package:acadeque_student_app/core/services/toast_service.dart';
@@ -6,10 +8,49 @@ import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/models/user_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class ProfileState extends BaseState {
   Dio dio = getHttp();
+
+  final ImagePicker picker = ImagePicker();
+
+  File? imagefile;
+
+  pickFromCamera(context) async {
+    final XFile? file = await picker.pickImage(source: ImageSource.camera);
+    if (file != null) {
+      // final temporaryImage = File(fileBits, fileName);
+      imagefile = File(file.path);
+    }
+    notifyListeners();
+    updateProfile();
+  }
+
+  pickFromGallery(context) async {
+    final XFile? file = await picker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      // final temporaryImage = File(fileBits, fileName);
+      imagefile = File(file.path);
+    }
+    notifyListeners();
+    updateProfile();
+  }
+
+  updateProfile() async {
+    setLoading(true);
+    try {
+      var data = FormData.fromMap(
+          {"student_image": await MultipartFile.fromFile(imagefile!.path)});
+      await dio.patch("/students/uploadprofile", data: data);
+      ToastService().s("Profile uploaded");
+      getUserDetail();
+      // ignore: empty_catches
+    } catch (err) {
+      print(err);
+    }
+  }
 
   ProfileState() {
     getToken();
@@ -86,18 +127,13 @@ class ProfileState extends BaseState {
   }
 
   getUserDetail() async {
-    print("yo id ho$id");
     if (id.isNotEmpty) {
       try {
         final response = await dio.get("/students/$id");
-        print("hello");
         userDetailState = userDetailResponse.fromJson(response.data);
-        print(response.data);
         notifyListeners();
         // ignore: empty_catches
-      } catch (err) {
-        print(err);
-      }
+      } catch (err) {}
     }
     setLoading(false);
   }
