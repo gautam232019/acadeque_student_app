@@ -19,10 +19,19 @@ class ProfileState extends BaseState {
   File? imagefile;
 
   pickFromCamera(context) async {
-    final XFile? file = await picker.pickImage(source: ImageSource.camera);
+    final XFile? file = await picker.pickImage(source: ImageSource.gallery);
     if (file != null) {
-      // final temporaryImage = File(fileBits, fileName);
-      imagefile = File(file.path);
+      File temp = File(file.path);
+      final kera = temp.readAsBytesSync().lengthInBytes;
+      final kb = kera / 1024;
+      final mb = kb / 1024;
+      int finalMb = mb.toInt();
+      if (finalMb <= 10) {
+        imagefile = File(file.path);
+      } else {
+        ToastService().w("Maximum image size is 10 MB!");
+        return;
+      }
     }
     notifyListeners();
     updateProfile();
@@ -31,8 +40,17 @@ class ProfileState extends BaseState {
   pickFromGallery(context) async {
     final XFile? file = await picker.pickImage(source: ImageSource.gallery);
     if (file != null) {
-      // final temporaryImage = File(fileBits, fileName);
-      imagefile = File(file.path);
+      File temp = File(file.path);
+      final kera = temp.readAsBytesSync().lengthInBytes;
+      final kb = kera / 1024;
+      final mb = kb / 1024;
+      int finalMb = mb.toInt();
+      if (finalMb <= 10) {
+        imagefile = File(file.path);
+      } else {
+        ToastService().w("Maximum image size is 10 MB!");
+        return;
+      }
     }
     notifyListeners();
     updateProfile();

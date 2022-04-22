@@ -101,75 +101,6 @@ class ProfileScreen extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-<<<<<<< Updated upstream
-                              sWidthSpan,
-                              Stack(
-                                children: [
-                                  if (state.userDetailState!.data!.student!
-                                      .profileURL!.isNotEmpty)
-                                    Container(
-                                      height: 80,
-                                      width: 80,
-                                      child: Image.network(
-                                        state.userDetailState!.data!.student!
-                                            .profileURL!,
-                                        fit: BoxFit.cover,
-                                        alignment: Alignment.center,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        color: Colors.red,
-                                      ),
-                                    )
-                                  else
-                                    SvgPicture.asset(
-                                      'assets/svg/image_thumbnail.svg',
-                                      height: 110,
-                                      width: 110,
-                                      color: Colors.white,
-                                    ),
-                                  Positioned(
-                                    top: 58,
-                                    left: 30,
-                                    child: SvgPicture.asset(
-                                        'assets/svg/camera_icon.svg'),
-                                  )
-
-                                  // if (state.userDetailState!.data!.student!
-                                  //     .profileURL!.isNotEmpty)
-                                  // Image.network(
-                                  //   state.userDetailState!.data!.student!
-                                  //       .profileURL!,
-                                  //   fit: BoxFit.cover,
-                                  //   width: double.infinity,
-                                  // ),
-                                ],
-                              ),
-                              lWidthSpan,
-                              // Stack(
-                              //   children: [
-                              //     Container(
-                              //       decoration: BoxDecoration(
-                              //         color: Colors.red,
-                              //         borderRadius: BorderRadius.circular(50),
-                              //       ),
-                              //       height: 60,
-                              //       width: 60,
-                              //     ),
-                              //     // SvgPicture.asset(
-                              //     //   'assets/svg/image_thumbnail.svg',
-                              //     //   height: 110,
-                              //     //   width: 110,
-                              //     //   color: Colors.white,
-                              //     // ),
-                              //     Positioned(
-                              //         top: 75,
-                              //         left: 40,
-                              //         child: SvgPicture.asset(
-                              //             'assets/svg/camera_icon.svg'))
-                              //   ],
-                              // ),
-=======
                               mWidthSpan,
                               InkWell(
                                 onTap: () {
@@ -270,7 +201,6 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               mWidthSpan,
->>>>>>> Stashed changes
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,12 +350,7 @@ class ProfileScreen extends StatelessWidget {
                                     iconPath: 'assets/svg/contact_icon.svg',
                                     title: 'Contact Number',
                                     value: state.userDetailState?.data?.student
-<<<<<<< Updated upstream
-                                            ?.contact
-                                            .toString() ??
-=======
                                             ?.contact ??
->>>>>>> Stashed changes
                                         "N/A",
                                   ),
                                 ),
