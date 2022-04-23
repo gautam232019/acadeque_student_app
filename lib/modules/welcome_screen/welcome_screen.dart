@@ -1,3 +1,4 @@
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -19,23 +20,17 @@ class WelcomeScreen extends StatelessWidget {
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        SizedBox(
-                          height: 105,
+                      children: [
+                        const SizedBox(
+                          height: 60,
                         ),
-                        Text(
-                          'LOGO',
-                          style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Roboto',
-                              color: Colors.white,
-                              letterSpacing: 1),
+                        Image.asset(
+                          'assets/images/logo.png',
+                          height: 80,
+                          width: 80,
                         ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Text(
+                        mHeightSpan,
+                        const Text(
                           'Welcome',
                           style: TextStyle(
                               fontSize: 24,
@@ -43,10 +38,8 @@ class WelcomeScreen extends StatelessWidget {
                               fontFamily: 'Roboto',
                               color: Colors.white),
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Text(
+                        sHeightSpan,
+                        const Text(
                           'Explore And Learn',
                           style: TextStyle(
                               fontSize: 14,
@@ -54,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                               fontFamily: 'Roboto',
                               color: Colors.white),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
