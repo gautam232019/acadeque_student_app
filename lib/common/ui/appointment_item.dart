@@ -17,6 +17,8 @@ class AppointmentItem extends StatelessWidget {
               const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
           child: InkWell(
             onTap: () {
+              Navigator.pushNamed(context, "/appointment_detail",
+                  arguments: item.sId);
               // Navigator.pushNamed(context, "/question_screen", arguments: item);
             },
             child: Row(
@@ -42,7 +44,9 @@ class AppointmentItem extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 8),
-                            child: Text('Pending'),
+                            child: item.status == "completed"
+                                ? const Text("Completed")
+                                : const Text('Pending'),
                             // item!.solved == true ? 'Solved' : 'Pending'),
                           ),
                         ),

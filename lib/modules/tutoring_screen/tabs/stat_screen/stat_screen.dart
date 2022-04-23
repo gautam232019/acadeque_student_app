@@ -25,13 +25,14 @@ class StatScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset('assets/svg/arrow_back.svg'),
-                      )),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset('assets/svg/arrow_back.svg'),
+                    ),
+                  ),
                   const Text(
                     'Statistics',
                     style: TextStyle(
