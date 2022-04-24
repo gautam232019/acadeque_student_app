@@ -19,7 +19,7 @@ class ProfileState extends BaseState {
   File? imagefile;
 
   pickFromCamera(context) async {
-    final XFile? file = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? file = await picker.pickImage(source: ImageSource.camera);
     if (file != null) {
       File temp = File(file.path);
       final kera = temp.readAsBytesSync().lengthInBytes;
