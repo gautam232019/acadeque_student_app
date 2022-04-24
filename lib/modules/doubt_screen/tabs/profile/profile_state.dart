@@ -65,9 +65,7 @@ class ProfileState extends BaseState {
       ToastService().s("Profile uploaded");
       getUserDetail();
       // ignore: empty_catches
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 
   ProfileState() {

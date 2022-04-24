@@ -19,10 +19,7 @@ class TutorHomeState extends BaseState {
       Debouncer(const Duration(seconds: 1), (value) {
     searchValue = value;
     notifyListeners();
-    print(searchValue);
     fetchSubject();
-
-    // print('kera khau');
   }, '');
 
   searchResponse? searchState;

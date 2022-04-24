@@ -16,13 +16,13 @@ class StatScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size.height;
     return Container(
       color: primaryColor,
-      child: ListView(
+      child: Column(
         children: [
           Container(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   InkWell(
                     onTap: () {
@@ -33,79 +33,113 @@ class StatScreen extends StatelessWidget {
                       child: SvgPicture.asset('assets/svg/arrow_back.svg'),
                     ),
                   ),
+                  lWidthSpan,
+                  lWidthSpan,
+                  lWidthSpan,
                   const Text(
-                    'Statistics',
+                    'Teachers',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Roboto'),
                   ),
-                  Container(
-                    height: 38,
-                    width: 38,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.search,
-                      color: primaryColor,
-                    ),
-                  ),
                 ],
               ),
             ),
-            height: size * 0.2,
+            height: size * 0.1 + 60,
             decoration: const BoxDecoration(
-                color: Color(0xFF59AEFD),
-                image: DecorationImage(
-                    image: AssetImage('assets/images/bg_shape.png'),
-                    fit: BoxFit.cover)),
+              color: Color(0xFF59AEFD),
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg_shape.png'),
+                  fit: BoxFit.cover),
+            ),
           ),
-          Container(
-            decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45,
-                    offset: Offset(
-                      5.0,
-                      5.0,
+          Padding(
+            padding: sPagePadding,
+            child: Container(
+              height: 52,
+              width: 327,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
                     ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  ),
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                    bottomLeft: Radius.zero,
-                    bottomRight: Radius.zero)),
-            height: size * 0.8 - 68,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: state.loading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : state.teachersState?.data?.teachers?.isEmpty ?? true
-                      ? const Center(
-                          child: Text("No Teachers"),
-                        )
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: state.teachersState!.data!.teachers!
-                                .map(
-                                  (e) => Column(
-                                    children: [
-                                      TutoringTutorWidget(teacherItem: e),
-                                      sHeightSpan,
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                  ],
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white),
+              child: TextField(
+                onChanged: (val) {
+                  state.searchDebouncer.value = val;
+                },
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Color(0xFFA1A1A1),
+                    ),
+                    hintStyle: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFFA1A1A1),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Roboto'),
+                    hintText: 'Search teachers'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black45,
+                        offset: Offset(
+                          5.0,
+                          5.0,
                         ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.0,
+                      ),
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                        bottomLeft: Radius.zero,
+                        bottomRight: Radius.zero)),
+                height: size * 0.8 - 68,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  child: state.loading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : state.teachersState?.data?.teachers?.isEmpty ?? true
+                          ? const Center(
+                              child: Text("No Teachers"),
+                            )
+                          : Column(
+                              children: state.teachersState!.data!.teachers!
+                                  .map(
+                                    (e) => Column(
+                                      children: [
+                                        TutoringTutorWidget(teacherItem: e),
+                                        sHeightSpan,
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                ),
+              ),
             ),
           )
         ],
