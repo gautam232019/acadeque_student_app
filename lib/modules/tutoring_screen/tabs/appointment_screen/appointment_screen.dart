@@ -1,6 +1,5 @@
 import 'package:acadeque_student_app/common/constrants/app_theme.dart';
 import 'package:acadeque_student_app/common/ui/appointment_item.dart';
-import 'package:acadeque_student_app/common/ui/ask_container.dart';
 import 'package:acadeque_student_app/modules/tutoring_screen/tabs/appointment_screen/appointment_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +9,7 @@ class AppointmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size.height;
     final state = Provider.of<AppointmentState>(context);
 
     return Container(

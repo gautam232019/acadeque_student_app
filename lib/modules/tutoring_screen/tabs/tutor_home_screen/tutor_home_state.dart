@@ -1,12 +1,10 @@
 import 'package:acadeque_student_app/common/utils/debouncer.dart';
 import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/services/local_storage_service.dart';
-import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/doube_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/models/user_detail_response.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/models/teachers_response.dart';
-import 'package:acadeque_student_app/modules/tutoring_screen/tabs/tutor_home_screen/models/search_response.dart';
 import 'package:dio/dio.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 

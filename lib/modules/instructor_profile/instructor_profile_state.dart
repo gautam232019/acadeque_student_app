@@ -67,16 +67,13 @@ class InstructorProfileState extends BaseState {
   TeacherProfileResponse? teacherProfileState;
 
   getTeacherProfile() async {
-    print("yo id ho $id");
     if (id != null) {
       try {
         final response = await dio.get("/teachers/$id");
         teacherProfileState = TeacherProfileResponse.fromJson(response.data);
         notifyListeners();
         // ignore: empty_catches
-      } catch (err) {
-        print(err);
-      }
+      } catch (err) {}
     }
   }
 }

@@ -35,11 +35,9 @@ class HomeState extends BaseState {
 
   getTeachers() async {
     setTeacherLoading(true);
-    print("mah yaha aepuge");
     try {
       final response = await dio.get("/teachers");
       teachersState = TeachersResponse.fromJson(response.data);
-      print(response.data);
       notifyListeners();
       // ignore: empty_catches
     } catch (err) {

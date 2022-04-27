@@ -48,7 +48,7 @@ class Teacher {
   List<Subjects>? subjects;
   num? hourlyRate;
   num? minuteRate;
-  int? avgRating;
+  num? avgRating;
   bool? enableInstantSession;
   bool? disabled;
   bool? approved;

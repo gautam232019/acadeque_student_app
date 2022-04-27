@@ -52,7 +52,7 @@ class Reviews {
   String? ratedToRef;
   String? ratedTo;
   String? satisfaction;
-  double? rating;
+  int? rating;
   String? feedback;
   String? createdAt;
 

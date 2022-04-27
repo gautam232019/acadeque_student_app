@@ -50,7 +50,7 @@ class Data {
 class Order {
   String? payBy;
   String? payTo;
-  double? amount;
+  int? amount;
   String? currency;
   Orders? orders;
   String? status;
