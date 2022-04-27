@@ -27,7 +27,7 @@ class TutoringTutorWidget extends StatelessWidget {
                 color: colorBox, borderRadius: BorderRadius.circular(8)),
             height: 72,
             width: 84,
-            child: teacherItem.profileURL != null
+            child: teacherItem.profileURL!.isNotEmpty
                 ? Image.network(
                     teacherItem.profileURL!,
                     fit: BoxFit.cover,

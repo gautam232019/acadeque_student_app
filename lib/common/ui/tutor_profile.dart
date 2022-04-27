@@ -1,3 +1,4 @@
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/home/models/teachers_response.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,12 @@ class _TutorProfileState extends State<TutorProfile> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  xsHeightSpan,
+                  if (widget.teacherItem!.hourlyRate == 0)
+                    const Text("Not rated")
+                  else
+                    Text("\$${widget.teacherItem!.hourlyRate.toString()}/hr"),
+                  xsHeightSpan,
                   const Text(
                     'Expertise',
                     style: TextStyle(
