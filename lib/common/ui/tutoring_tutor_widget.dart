@@ -27,6 +27,13 @@ class TutoringTutorWidget extends StatelessWidget {
                 color: colorBox, borderRadius: BorderRadius.circular(8)),
             height: 72,
             width: 84,
+            child: teacherItem.profileURL != null
+                ? Image.network(
+                    teacherItem.profileURL!,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  )
+                : null,
           ),
           sWidthSpan,
           Expanded(

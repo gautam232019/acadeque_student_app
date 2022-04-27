@@ -48,7 +48,7 @@ class Teacher {
   List<Subjects>? subjects;
   num? hourlyRate;
   num? minuteRate;
-  num? avgRating;
+  int? avgRating;
   bool? enableInstantSession;
   bool? disabled;
   bool? approved;
@@ -56,6 +56,7 @@ class Teacher {
   String? description;
   Experience? experience;
   num? students;
+  String? profileURL;
 
   Teacher(
       {this.sId,
@@ -74,7 +75,8 @@ class Teacher {
       this.createdAt,
       this.description,
       this.experience,
-      this.students});
+      this.students,
+      this.profileURL});
 
   Teacher.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -100,7 +102,8 @@ class Teacher {
     experience = json['experience'] != null
         ? new Experience.fromJson(json['experience'])
         : null;
-    students = json['students'] ?? 0;
+    students = json['students'];
+    profileURL = json['profileURL'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -126,6 +129,7 @@ class Teacher {
       data['experience'] = this.experience!.toJson();
     }
     data['students'] = this.students;
+    data['profileURL'] = this.profileURL;
     return data;
   }
 }
@@ -184,7 +188,7 @@ class Experience {
   Experience({this.numberDecimal});
 
   Experience.fromJson(Map<String, dynamic> json) {
-    numberDecimal = json['\$numberDecimal'];
+    numberDecimal = json['$numberDecimal'];
   }
 
   Map<String, dynamic> toJson() {

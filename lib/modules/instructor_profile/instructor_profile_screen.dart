@@ -38,18 +38,49 @@ class InstructorProfileScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            mWidthSpan,
                             GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: SvgPicture.asset('assets/svg/back.svg')),
-                            const Text(''),
-                            Center(
-                                child: Image.asset(
-                                    'assets/images/verifiedicon.png')),
-                            Image.asset('assets/images/message.png'),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: SvgPicture.asset('assets/svg/back.svg'),
+                            ),
+                            lWidthSpan,
+                            lWidthSpan,
+                            lWidthSpan,
+                            if (state.loading == false &&
+                                state.teacherProfileState != null &&
+                                state.teacherProfileState!.data!.teacher!
+                                    .profileURL!.isNotEmpty)
+                              Container(
+                                height: 120,
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.network(
+                                    state.teacherProfileState!.data!.teacher!
+                                        .profileURL!,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(60),
+                                  color: Colors.transparent,
+                                ),
+                              )
+                            else
+                              Container(
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(60),
+                                  color: Colors.black,
+                                ),
+                              ),
                           ],
                         ),
                       ),
@@ -95,16 +126,16 @@ class InstructorProfileScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    state.teacherProfileState?.data?.teacher!
-                                            .name ??
-                                        "",
-                                    style: const TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
+                                  if (state.teacherProfileState != null)
+                                    Text(
+                                      state.teacherProfileState!.data!.teacher!
+                                          .name!,
+                                      style: const TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
                                   const SizedBox(
                                     height: 7,
                                   ),
@@ -344,16 +375,18 @@ class InstructorProfileScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     // Image.asset('assets/images/64.png'),
-                                    if (state.studentFeedBackState!.data!
-                                        .satisfactions!.isEmpty)
-                                      const CircleAvatar(
-                                        child: Text("0%"),
-                                      )
-                                    else
+                                    if (state.studentFeedBackState != null &&
+                                        state.studentFeedBackState!.data!
+                                            .satisfactions!.isNotEmpty)
                                       CircleAvatar(
                                         child: Text(
                                             "${state.studentFeedBackState!.data!.satisfactions![0].percentage!.toString()} %"),
+                                      )
+                                    else
+                                      const CircleAvatar(
+                                        child: Text("0%"),
                                       ),
+
                                     const SizedBox(
                                       width: 14,
                                     ),

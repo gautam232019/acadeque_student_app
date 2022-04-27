@@ -61,6 +61,7 @@ class Teachers {
   bool? approved;
   String? createdAt;
   num? iV;
+  String? profileURL;
   String? description;
   Experience? experience;
   num? students;
@@ -81,6 +82,7 @@ class Teachers {
       this.approved,
       this.createdAt,
       this.iV,
+      this.profileURL,
       this.description,
       this.experience,
       this.students});
@@ -101,6 +103,7 @@ class Teachers {
     approved = json['approved'];
     createdAt = json['createdAt'];
     iV = json['__v'];
+    profileURL = json['profileURL'];
     description = json['description'];
     experience = json['experience'] != null
         ? new Experience.fromJson(json['experience'])
@@ -125,6 +128,7 @@ class Teachers {
     data['approved'] = this.approved;
     data['createdAt'] = this.createdAt;
     data['__v'] = this.iV;
+    data['profileURL'] = this.profileURL;
     data['description'] = this.description;
     if (this.experience != null) {
       data['experience'] = this.experience!.toJson();
