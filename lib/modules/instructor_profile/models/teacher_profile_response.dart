@@ -102,7 +102,7 @@ class Teacher {
     experience = json['experience'] != null
         ? new Experience.fromJson(json['experience'])
         : null;
-    students = json['students'];
+    students = json['students'] ?? 0;
     profileURL = json['profileURL'] ?? "";
   }
 
