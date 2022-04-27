@@ -32,15 +32,21 @@ class StatState extends BaseState {
     setLoading(false);
   }
 
+  TeachersResponse? searchState;
+
   searchTeacher() async {
     setLoading(true);
-    try {
-      final response = await dio.get("/teachers?name[regex]=$searchValue");
-      TeachersResponse searchedTeacher =
-          TeachersResponse.fromJson(response.data);
-      teachersState!.data!.teachers = searchedTeacher.data!.teachers!;
-      // ignore: empty_catches
-    } catch (err) {}
+    if (searchValue.isNotEmpty) {
+      try {
+        final response = await dio.get("/teachers/search?value=$searchValue");
+        searchState = TeachersResponse.fromJson(response.data);
+        teachersState!.data!.teachers = searchState!.data!.teachers!;
+        notifyListeners();
+        // ignore: empty_catches
+      } catch (err) {}
+    } else {
+      getTeachers();
+    }
     setLoading(false);
   }
 }

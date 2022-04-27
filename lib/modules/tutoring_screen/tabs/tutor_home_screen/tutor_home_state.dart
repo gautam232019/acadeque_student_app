@@ -19,29 +19,25 @@ class TutorHomeState extends BaseState {
       Debouncer(const Duration(seconds: 1), (value) {
     searchValue = value;
     notifyListeners();
-    fetchSubject();
+    searchTeacher();
   }, '');
 
-  searchResponse? searchState;
+  TeachersResponse? searchState;
 
-  fetchSubject() async {
+  searchTeacher() async {
     setTeacherLoading(true);
     if (searchValue.isNotEmpty) {
       try {
-        final response = await dio.get("/subjects?name[regex]=$searchValue");
-        searchState = searchResponse.fromJson(response.data);
+        final response = await dio.get("/teachers/search?value=$searchValue");
+        searchState = TeachersResponse.fromJson(response.data);
+        teachersState!.data!.teachers = searchState!.data!.teachers!;
         notifyListeners();
-        if (searchState!.data!.subjects!.isNotEmpty) {
-          fetchTeacherWithSubject(searchState!.data!.subjects![0].sId!);
-        } else {
-          ToastService().e("Subject not found!");
-          getTeachers();
-        }
         // ignore: empty_catches
       } catch (err) {}
     } else {
       getTeachers();
     }
+    setTeacherLoading(false);
   }
 
   TeachersResponse? searchedTeacherState;

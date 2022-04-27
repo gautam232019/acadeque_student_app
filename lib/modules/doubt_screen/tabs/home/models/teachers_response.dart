@@ -94,7 +94,7 @@ class Teachers {
     role = json['role'];
     email = json['email'];
     work = json['work'];
-    subjects = json['subjects'].cast<String>();
+    subjects = json['subjects'] != null ? json['subjects'].cast<String>() : [];
     hourlyRate = json['hourlyRate'] ?? 0;
     minuteRate = json['minuteRate'];
     avgRating = json['avgRating'];

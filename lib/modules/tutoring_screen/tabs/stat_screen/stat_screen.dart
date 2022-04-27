@@ -89,7 +89,7 @@ class StatScreen extends StatelessWidget {
                         color: Color(0xFFA1A1A1),
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Roboto'),
-                    hintText: 'Search teachers'),
+                    hintText: 'Filter for specific subject(e.g. Statistics)'),
               ),
             ),
           ),
