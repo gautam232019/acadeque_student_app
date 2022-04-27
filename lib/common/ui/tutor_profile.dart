@@ -33,11 +33,13 @@ class _TutorProfileState extends State<TutorProfile> {
                     borderRadius: BorderRadius.circular(8)),
                 height: 72,
                 width: 84,
-                child: const Icon(
-                  Icons.play_arrow_rounded,
-                  size: 50,
-                  color: Colors.grey,
-                ),
+                child: widget.teacherItem!.profileURL!.isNotEmpty
+                    ? Image.network(
+                        widget.teacherItem!.profileURL!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      )
+                    : null,
               ),
               const SizedBox(
                 width: 12,

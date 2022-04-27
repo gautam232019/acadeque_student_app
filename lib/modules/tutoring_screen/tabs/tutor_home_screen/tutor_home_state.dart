@@ -53,7 +53,6 @@ class TutorHomeState extends BaseState {
       searchedTeacherState = TeachersResponse.fromJson(response.data);
       notifyListeners();
       teachersState!.data!.teachers = searchedTeacherState!.data!.teachers!;
-      print(teachersState!.data!.teachers!.length.toString());
       // ignore: empty_catches
     } catch (err) {}
     setTeacherLoading(false);

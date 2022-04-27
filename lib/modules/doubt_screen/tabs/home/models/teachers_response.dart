@@ -103,7 +103,7 @@ class Teachers {
     approved = json['approved'];
     createdAt = json['createdAt'];
     iV = json['__v'];
-    profileURL = json['profileURL'];
+    profileURL = json['profileURL'] ?? "";
     description = json['description'];
     experience = json['experience'] != null
         ? new Experience.fromJson(json['experience'])
