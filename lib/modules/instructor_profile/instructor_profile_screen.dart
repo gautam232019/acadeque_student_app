@@ -15,6 +15,15 @@ class InstructorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<InstructorProfileState>(context);
+    makeFirstCapital(name) {
+      final arr = name.split("");
+      arr[0] = arr[0].toUpperCase();
+      final pathauneString = arr.join("");
+      return pathauneString;
+    }
+
+    makeFirstCapital("chris");
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: state.loading
@@ -418,23 +427,46 @@ class InstructorProfileScreen extends StatelessWidget {
                             const SizedBox(
                               height: 15,
                             ),
-                            const RatingRowWidget(
-                                title: 'Very Satisfied', count: 0),
-                            DividerLine(),
-                            if (state.studentFeedBackState!.data!.satisfactions!
-                                .isNotEmpty)
-                              RatingRowWidget(
-                                  title: 'Satisfied ',
-                                  count: state.studentFeedBackState!.data!
-                                      .satisfactions![0].students!)
+                            if (state.listOMaps!.isNotEmpty)
+                              Column(
+                                children: state.listOMaps!.map((e) {
+                                  String name = "";
+                                  if (e["field"] == "normal") {
+                                    name = "Neutral";
+                                  } else if (e["field"] == "poor") {
+                                    name = "Poor";
+                                  } else if (e["field"] == "satisfied") {
+                                    name = "Satisfied";
+                                  } else if (e["field"] == "very satisfied") {
+                                    name = "Very Satisfied";
+                                  }
+                                  return Column(
+                                    children: [
+                                      RatingRowWidget(
+                                          title: name, count: e["number"]),
+                                      DividerLine(),
+                                    ],
+                                  );
+                                }).toList(),
+                              )
                             else
-                              const RatingRowWidget(
-                                  title: 'Satisfied ', count: 0),
-                            DividerLine(),
-                            const RatingRowWidget(title: 'Neutral', count: 0),
-                            DividerLine(),
-                            const RatingRowWidget(title: 'Poor', count: 0),
-                            DividerLine(),
+                              Column(
+                                children: [
+                                  const RatingRowWidget(
+                                      title: 'Very Satisfied', count: 0),
+                                  DividerLine(),
+                                  const RatingRowWidget(
+                                      title: 'Satisfied ', count: 0),
+                                  DividerLine(),
+                                  const RatingRowWidget(
+                                      title: 'Neutral', count: 0),
+                                  DividerLine(),
+                                  const RatingRowWidget(
+                                      title: 'Poor', count: 0),
+                                  DividerLine(),
+                                ],
+                              ),
+
                             const SizedBox(
                               height: 30,
                             ),
@@ -484,7 +516,11 @@ class InstructorProfileScreen extends StatelessWidget {
                                       true
                                   ? const Center(
                                       child: Text('No Reviews found!'))
-                                  : ListView.builder(
+                                  : ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
                                       itemCount: state.teacherReviewState!.data!
                                           .reviews!.length,
                                       scrollDirection: Axis.horizontal,

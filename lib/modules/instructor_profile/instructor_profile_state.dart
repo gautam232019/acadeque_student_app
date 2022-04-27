@@ -1,5 +1,6 @@
 import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
+import 'package:acadeque_student_app/modules/instructor_profile/models/all_feedback_response.dart';
 import 'package:acadeque_student_app/modules/instructor_profile/models/student_feed_back_response.dart';
 import 'package:acadeque_student_app/modules/instructor_profile/models/teacher_profile_response.dart';
 import 'package:acadeque_student_app/modules/instructor_profile/models/teacher_review_response.dart';
@@ -19,6 +20,7 @@ class InstructorProfileState extends BaseState {
     getTeacherProfile();
     fetchReviews();
     fetchStudentFeedback();
+    fetchAllFeedback();
   }
 
   TeacherReviewResponse? teacherReviewState;
@@ -35,12 +37,29 @@ class InstructorProfileState extends BaseState {
   StudentFeedBackResponse? studentFeedBackState;
 
   fetchStudentFeedback() async {
-    setLoading(true);
     try {
       final response = await dio.get("/teachers/$id/overallsatisfaction");
       studentFeedBackState = StudentFeedBackResponse.fromJson(response.data);
       notifyListeners();
-      print(studentFeedBackState!.data!.satisfactions![0].students);
+      // ignore: empty_catches
+    } catch (err) {}
+  }
+
+  AllFeedbackResponse? allfeedbackState;
+  List<Map<String, dynamic>>? listOMaps;
+
+  fetchAllFeedback() async {
+    try {
+      final response = await dio.get("/teachers/$id/satisfactions");
+      allfeedbackState = AllFeedbackResponse.fromJson(response.data);
+      notifyListeners();
+      listOMaps = allfeedbackState!.data!.satisfactions!
+          .map((something) => {
+                "field": something.satisfaction,
+                "number": something.students,
+              })
+          .toList();
+      print(listOMaps);
       // ignore: empty_catches
     } catch (err) {}
     setLoading(false);
