@@ -45,7 +45,7 @@ class AddQuestionState extends BaseState {
 
   onSubmit(context) async {
     onQuestionLoading(true);
-    if (subject != null && question.isNotEmpty && imagefile != null) {
+    if (subject != null && question.isNotEmpty) {
       try {
         var data = FormData.fromMap({
           "question": question,
