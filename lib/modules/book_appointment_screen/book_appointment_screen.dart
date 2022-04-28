@@ -378,7 +378,7 @@ class BookAppointmentScreen extends StatelessWidget {
                                       )
                                     : state.teacherSlotState == null
                                         ? const Center(
-                                            child: Text("To slots available!"),
+                                            child: Text("No slots available!"),
                                           )
                                         : Container(
                                             margin: const EdgeInsets.only(
@@ -431,7 +431,7 @@ class BookAppointmentScreen extends StatelessWidget {
                                                                             .all(
                                                                         8.0),
                                                                 child: Text(
-                                                                  "${Jiffy(Jiffy.unixFromMillisecondsSinceEpoch(e.from!).format()).format('hh:mm:ss a')} - ${Jiffy(Jiffy.unixFromMillisecondsSinceEpoch(e.to!).format()).format('hh:mm:ss a')} ",
+                                                                  "${Jiffy(Jiffy.unixFromMillisecondsSinceEpoch(e.from!).format()).format('hh:mm a')} - ${Jiffy(Jiffy.unixFromMillisecondsSinceEpoch(e.to!).format()).format('hh:mm a')} ",
                                                                   style:
                                                                       TextStyle(
                                                                     color: state.selectedTimeSlot ==

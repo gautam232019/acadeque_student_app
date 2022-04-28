@@ -72,9 +72,9 @@ class AskContainer extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
-                      const Text(
-                        "Normal Descriptions",
-                        style: TextStyle(
+                      Text(
+                        item!.subjectId!,
+                        style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Roboto',

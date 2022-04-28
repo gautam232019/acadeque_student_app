@@ -31,7 +31,6 @@ class AskState extends BaseState {
 
   getQuestions() async {
     setLoading(true);
-
     try {
       // print("yo token ho $id");
       final response = await dio.get("/students/$id/questions");
