@@ -17,14 +17,24 @@ class QuestionWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: ListView(
         children: [
-          Container(
-            child: Image.network(questionItem.mediaURL!),
-            height: 163,
-            width: 329,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+          if (questionItem.mediaURL != null)
+            Container(
+              child: Image.network(questionItem.mediaURL!),
+              height: 163,
+              width: 329,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            )
+          else
+            Container(
+              height: 163,
+              width: 329,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: colorBox,
+              ),
             ),
-          ),
           SizedBox(
             height: 15,
           ),
