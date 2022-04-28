@@ -27,11 +27,12 @@ class AskContainer extends StatelessWidget {
                   width: 114,
                   child: Stack(
                     children: [
-                      Image.network(
-                        item!.mediaURL!,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      ),
+                      if (item!.mediaURL != null)
+                        Image.network(
+                          item!.mediaURL!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
                       const Text(''),
                       Center(
                         child: Container(
