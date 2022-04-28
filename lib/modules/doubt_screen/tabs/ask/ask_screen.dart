@@ -41,8 +41,6 @@ class AskScreen extends StatelessWidget {
                     image: AssetImage('assets/images/bg_shape.png'),
                     fit: BoxFit.cover)),
           ),
-          if (state.studentQuestionsState!.data!.questions!.isNotEmpty)
-            Text("kera"),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(

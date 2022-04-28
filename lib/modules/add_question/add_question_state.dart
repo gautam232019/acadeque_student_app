@@ -47,14 +47,22 @@ class AddQuestionState extends BaseState {
     onQuestionLoading(true);
     if (subject != null && question.isNotEmpty) {
       try {
-        var data = FormData.fromMap({
-          "question": question,
-          "subjectId": subject,
-          "media": await MultipartFile.fromFile(imagefile!.path)
-        });
+        FormData? data;
+        if (imagefile != null) {
+          data = FormData.fromMap({
+            "question": question,
+            "subjectId": subject,
+            "media": await MultipartFile.fromFile(imagefile!.path)
+          });
+        } else {
+          data = FormData.fromMap({
+            "question": question,
+            "subjectId": subject,
+          });
+        }
         await dio.post("/questions", data: data);
         ToastService().s("Question uploaded successfully!");
-        Navigator.pushNamed(context, "/confirmation");
+        Navigator.pop(context);
       } catch (err) {
         // print(err);
       }
