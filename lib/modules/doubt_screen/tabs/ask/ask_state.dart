@@ -24,7 +24,7 @@ class AskState extends BaseState {
     token = LocalStorageService().read(LocalStorageKeys.accessToken) ?? "";
     notifyListeners();
     Map<String, dynamic> user = Jwt.parseJwt(token!);
-    id = user["userId"] as String;
+    id = user["userId"];
     notifyListeners();
     // print(userState?.userId!);
   }
@@ -32,12 +32,14 @@ class AskState extends BaseState {
   getQuestions() async {
     setLoading(true);
     try {
-      // print("yo token ho $id");
+      print("yo token ho $id");
       final response = await dio.get("/students/$id/questions");
       studentQuestionsState = StudentQuestionResponse.fromJson(response.data);
       notifyListeners();
       // ignore: empty_catches
-    } catch (err) {}
+    } catch (err) {
+      print(err);
+    }
     setLoading(false);
   }
 }

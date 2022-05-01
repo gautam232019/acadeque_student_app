@@ -74,7 +74,7 @@ class AskContainer extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        item!.subjectId!,
+                        "kera",
                         style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
