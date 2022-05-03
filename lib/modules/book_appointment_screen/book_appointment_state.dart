@@ -61,7 +61,7 @@ class BookAppointmentState extends BaseState {
         teacherScheduleState!.data!.schedules!.first.month!,
         teacherScheduleState!.data!.schedules!.first.days![0],
       );
-      print(teacherScheduleState!.data!.schedules);
+      // print(teacherScheduleState!.data!.schedules!.last.month);
       notifyListeners();
       getTeacherSlots();
       // ignore: empty_catches

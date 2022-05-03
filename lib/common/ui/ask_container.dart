@@ -15,9 +15,7 @@ class AskContainer extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
           child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, "/question_screen", arguments: item);
-            },
+            onTap: () async {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

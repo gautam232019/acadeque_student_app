@@ -80,8 +80,15 @@ class AskScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final item = state.studentQuestionsState!.data!
                                     .questions![index];
-                                return AskContainer(
-                                  item: item,
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, "/question_screen",
+                                        arguments: item);
+                                  },
+                                  child: AskContainer(
+                                    item: item,
+                                  ),
                                 );
                               },
                             ),

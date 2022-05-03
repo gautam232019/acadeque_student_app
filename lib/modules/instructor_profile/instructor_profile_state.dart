@@ -12,7 +12,6 @@ class InstructorProfileState extends BaseState {
 
   String? id;
   InstructorProfileState(context) {
-    setLoading(true);
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     id = args['id'];
@@ -26,6 +25,7 @@ class InstructorProfileState extends BaseState {
   TeacherReviewResponse? teacherReviewState;
 
   fetchReviews() async {
+    setLoading(true);
     try {
       final response = await dio.get("/teachers/$id/reviews");
       teacherReviewState = TeacherReviewResponse.fromJson(response.data);
@@ -37,6 +37,7 @@ class InstructorProfileState extends BaseState {
   StudentFeedBackResponse? studentFeedBackState;
 
   fetchStudentFeedback() async {
+    setLoading(true);
     try {
       final response = await dio.get("/teachers/$id/overallsatisfaction");
       studentFeedBackState = StudentFeedBackResponse.fromJson(response.data);
@@ -49,6 +50,7 @@ class InstructorProfileState extends BaseState {
   List<Map<String, dynamic>>? listOMaps;
 
   fetchAllFeedback() async {
+    setLoading(true);
     try {
       final response = await dio.get("/teachers/$id/satisfactions");
       allfeedbackState = AllFeedbackResponse.fromJson(response.data);
@@ -67,6 +69,7 @@ class InstructorProfileState extends BaseState {
   TeacherProfileResponse? teacherProfileState;
 
   getTeacherProfile() async {
+    setLoading(true);
     if (id != null) {
       try {
         final response = await dio.get("/teachers/$id");

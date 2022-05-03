@@ -62,7 +62,7 @@ class AddQuestionState extends BaseState {
         }
         await dio.post("/questions", data: data);
         ToastService().s("Question uploaded successfully!");
-        Navigator.pop(context);
+        Navigator.pop(context, true);
       } catch (err) {
         // print(err);
       }

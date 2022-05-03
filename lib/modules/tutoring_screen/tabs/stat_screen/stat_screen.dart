@@ -126,17 +126,19 @@ class StatScreen extends StatelessWidget {
                           ? const Center(
                               child: Text("No Teachers"),
                             )
-                          : Column(
-                              children: state.teachersState!.data!.teachers!
-                                  .map(
-                                    (e) => Column(
-                                      children: [
-                                        TutoringTutorWidget(teacherItem: e),
-                                        sHeightSpan,
-                                      ],
-                                    ),
-                                  )
-                                  .toList(),
+                          : SingleChildScrollView(
+                              child: Column(
+                                children: state.teachersState!.data!.teachers!
+                                    .map(
+                                      (e) => Column(
+                                        children: [
+                                          TutoringTutorWidget(teacherItem: e),
+                                          sHeightSpan,
+                                        ],
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
                             ),
                 ),
               ),
