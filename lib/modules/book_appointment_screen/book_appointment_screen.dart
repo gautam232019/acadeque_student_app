@@ -278,7 +278,6 @@ class BookAppointmentScreen extends StatelessWidget {
                                                       .schedules!
                                                       .first
                                                       .days![0],
-                                                  0,
                                                 ),
                                         selectableDayPredicate: (date) {
                                           var kera = state.teacherScheduleState!
@@ -299,48 +298,17 @@ class BookAppointmentScreen extends StatelessWidget {
                                           state.teacherScheduleState?.data
                                                   ?.schedules!.first.year ??
                                               DateTime.now().year,
-                                          DateTime.now().month,
+                                          state.teacherScheduleState!.data!
+                                              .schedules!.first.month!,
                                           0,
                                         ),
-                                        lastDate: state
-                                                    .teacherScheduleState!
-                                                    .data!
-                                                    .schedules!
-                                                    .first
-                                                    .month !=
-                                                state.teacherScheduleState!
-                                                    .data!.schedules!.last.month
-                                            ? DateTime(
-                                                state
-                                                    .teacherScheduleState!
-                                                    .data!
-                                                    .schedules!
-                                                    .last
-                                                    .year!,
-                                                state
-                                                    .teacherScheduleState!
-                                                    .data!
-                                                    .schedules!
-                                                    .last
-                                                    .month!,
-                                                0,
-                                              )
-                                            : DateTime(
-                                                state
-                                                    .teacherScheduleState!
-                                                    .data!
-                                                    .schedules!
-                                                    .first
-                                                    .year!,
-                                                state
-                                                        .teacherScheduleState!
-                                                        .data!
-                                                        .schedules!
-                                                        .first
-                                                        .month! +
-                                                    1,
-                                                0,
-                                              ),
+                                        lastDate: DateTime(
+                                          state.teacherScheduleState!.data!
+                                              .schedules!.last.year!,
+                                          state.teacherScheduleState!.data!
+                                              .schedules!.last.month!,
+                                          30,
+                                        ),
                                         onDateSelected: (date) {
                                           state.onAppointmentDateChange(date);
                                         },
