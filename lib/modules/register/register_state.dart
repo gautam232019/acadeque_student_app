@@ -1,7 +1,9 @@
 import 'package:acadeque_student_app/core/http/http.dart';
+import 'package:acadeque_student_app/core/services/local_storage_service.dart';
 import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class RegisterState extends BaseState {
@@ -34,21 +36,25 @@ class RegisterState extends BaseState {
     notifyListeners();
   }
 
+  String? token;
+
   onSubmit(context) async {
     setLoading(true);
-    if (formKey.currentState!.validate()) {
-      var data = {
-        "name": userName,
-        "email": email,
-        "password": password,
-      };
+    if (userName.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
       try {
-        final response = await dio.post("/students", data: data);
-        ToastService().s("Account created successfully!");
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-      } catch (err) {}
+        final result = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        result.user!.sendEmailVerification();
+        ToastService().s("Successfully registered!");
+        LocalStorageService().write(LocalStorageKeys.userName, userName);
+        LocalStorageService().write(LocalStorageKeys.email, email);
+        Navigator.pop(context);
+      } catch (err) {
+        ToastService().e(err.toString());
+      }
+    } else {
+      ToastService().w("Please provide all fields!");
     }
-
     setLoading(false);
   }
 }
