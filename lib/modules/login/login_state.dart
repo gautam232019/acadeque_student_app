@@ -33,13 +33,14 @@ class LoginState extends BaseState {
   String? token;
 
   onSubmit(context) async {
+    setLoading(true);
     try {
+      final finalEmail = userName.replaceAll(' ', '');
       final response = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: userName, password: password);
+          .signInWithEmailAndPassword(email: finalEmail, password: password);
       if (FirebaseAuth.instance.currentUser != null) {
         final token = await FirebaseAuth.instance.currentUser!.getIdToken();
         this.token = token;
-        print(token);
         notifyListeners();
       }
       if (response.user!.emailVerified == false) {
@@ -49,7 +50,6 @@ class LoginState extends BaseState {
       if (FirebaseAuth.instance.currentUser != null) {
         final token = await FirebaseAuth.instance.currentUser!.getIdToken();
         this.token = token;
-        print(token);
         notifyListeners();
       }
       onFinalSubmit(context);
@@ -61,37 +61,28 @@ class LoginState extends BaseState {
 
   onFinalSubmit(context) async {
     try {
+      final finalEmail = userName.replaceAll(' ', '');
       String? name = LocalStorageService().read(LocalStorageKeys.userName);
       String? storedEmail = LocalStorageService().read(LocalStorageKeys.email);
-      if (storedEmail == userName) {
+      if (storedEmail == finalEmail) {
         final response = await dio.get(
             "/auth/provider?user=student&provider=password&idToken=$token&name=$name");
-        print(response.data);
+        LocalStorageService()
+            .write(LocalStorageKeys.accessToken, response.data["data"]);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/welcome', (route) => false);
       } else {
-        // final response = await dio.get(
-        // "/auth/provider?user=student&provider=password&idToken=$token");
-        // print(response.data);
+        final response = await dio.get(
+            "/auth/provider?user=student&provider=password&idToken=$token");
+        LocalStorageService()
+            .write(LocalStorageKeys.accessToken, response.data["data"]);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/welcome', (route) => false);
       }
+      setLoading(false);
       // ignore: empty_catches
-    } catch (err) {}
+    } catch (err) {
+      setLoading(false);
+    }
   }
-
-  // onSubmit(context) async {
-  //   setLoading(true);
-  //   if (formKey.currentState!.validate()) {
-  //     var data = {
-  //       "email": userName,
-  //       "password": password,
-  //     };
-  //     try {
-  //       final response = await dio.post("auth/login?user=student", data: data);
-  //       LocalStorageService()
-  //           .write(LocalStorageKeys.accessToken, response.data["data"]);
-
-  //       Navigator.pushReplacementNamed(context, '/splash');
-  //       // ignore: empty_catches
-  //     } catch (err) {}
-  //   }
-  //   setLoading(false);
-  // }
 }

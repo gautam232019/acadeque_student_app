@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ProfileState>(context);
-    onTextEdit(String field, dynamic? value) {
+    onTextEdit(String field, dynamic value) {
       return showDialog<bool>(
         context: context,
         barrierDismissible: true, // user must tap button!
@@ -192,11 +192,19 @@ class ProfileScreen extends StatelessWidget {
                                         width: 110,
                                         color: Colors.white,
                                       ),
-                                    Positioned(
-                                        top: 55,
-                                        left: 30,
-                                        child: SvgPicture.asset(
-                                            'assets/svg/camera_icon.svg'))
+                                    if (state.userDetailState!.data!.student!
+                                        .profileURL!.isNotEmpty)
+                                      Positioned(
+                                          top: 55,
+                                          left: 30,
+                                          child: SvgPicture.asset(
+                                              'assets/svg/camera_icon.svg'))
+                                    else
+                                      Positioned(
+                                          top: 70,
+                                          left: 40,
+                                          child: SvgPicture.asset(
+                                              'assets/svg/camera_icon.svg'))
                                   ],
                                 ),
                               ),
