@@ -266,18 +266,8 @@ class BookAppointmentScreen extends StatelessWidget {
                                                       .schedules!
                                                       .first
                                                       .year!,
-                                                  state
-                                                      .teacherScheduleState!
-                                                      .data!
-                                                      .schedules!
-                                                      .first
-                                                      .month!,
-                                                  state
-                                                      .teacherScheduleState!
-                                                      .data!
-                                                      .schedules!
-                                                      .first
-                                                      .days![0],
+                                                  state.initialMonth ?? 0,
+                                                  state.initialDay ?? 0,
                                                 ),
                                         selectableDayPredicate: (date) {
                                           var kera = state.teacherScheduleState!
@@ -298,9 +288,7 @@ class BookAppointmentScreen extends StatelessWidget {
                                           state.teacherScheduleState?.data
                                                   ?.schedules!.first.year ??
                                               DateTime.now().year,
-                                          state.teacherScheduleState!.data!
-                                              .schedules!.first.month!,
-                                          0,
+                                          state.initialMonth!,
                                         ),
                                         lastDate: DateTime(
                                           state.teacherScheduleState!.data!

@@ -49,6 +49,9 @@ class BookAppointmentState extends BaseState {
 
   TeacherScheduleResponse? teacherScheduleState;
 
+  int? initialMonth;
+  int? initialDay;
+
   getTeacherSchedule() async {
     setLoading(true);
     try {
@@ -56,11 +59,26 @@ class BookAppointmentState extends BaseState {
           await dio.get("/teachers/$id/schedules?year=${DateTime.now().year}");
       teacherScheduleState = TeacherScheduleResponse.fromJson(response.data);
       notifyListeners();
-      selectedAppointmentDate = DateTime(
-        teacherScheduleState!.data!.schedules!.first.year!,
-        teacherScheduleState!.data!.schedules!.first.month!,
-        teacherScheduleState!.data!.schedules!.first.days![0],
-      );
+      // selectedAppointmentDate = DateTime(
+      //   teacherScheduleState!.data!.schedules!.first.year!,
+      //   teacherScheduleState!.data!.schedules!.first.month!,
+      //   teacherScheduleState!.data!.schedules!.first.days![0],
+      // );
+      final DateTime currentDate = DateTime.now();
+      for (var item in teacherScheduleState!.data!.schedules!) {
+        for (var smallItem in item.days!) {
+          if (item.month! >= currentDate.month && smallItem > currentDate.day) {
+            print(item.month);
+            print(smallItem);
+            initialDay = smallItem;
+            initialMonth = item.month;
+            break;
+          }
+          if (initialMonth != null && initialDay != null) {
+            break;
+          }
+        }
+      }
       // print(teacherScheduleState!.data!.schedules!.last.month);
       notifyListeners();
       getTeacherSlots();
