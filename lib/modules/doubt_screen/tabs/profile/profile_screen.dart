@@ -195,7 +195,7 @@ class ProfileScreen extends StatelessWidget {
                                     if (state.userDetailState!.data!.student!
                                         .profileURL!.isNotEmpty)
                                       Positioned(
-                                          top: 55,
+                                          top: 60,
                                           left: 30,
                                           child: SvgPicture.asset(
                                               'assets/svg/camera_icon.svg'))
@@ -332,27 +332,27 @@ class ProfileScreen extends StatelessWidget {
                                 DividerLine(),
                                 InkWell(
                                   onTap: () {
-                                    state.onChange(
-                                        "name",
-                                        state.userDetailState!.data!.student!
-                                                .name ??
-                                            "");
-                                    state.onChange(
-                                        "email",
-                                        state.userDetailState!.data!.student!
-                                                .email ??
-                                            "");
-                                    state.onChange(
-                                        "contact",
-                                        state.userDetailState!.data!.student!
-                                                .contact ??
-                                            "");
-                                    onTextEdit(
-                                        "contact",
-                                        state.userDetailState!.data!.student
-                                                ?.contact
-                                                .toString() ??
-                                            "");
+                                    // state.onChange(
+                                    //     "name",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .name ??
+                                    //         "");
+                                    // state.onChange(
+                                    //     "email",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .email ??
+                                    //         "");
+                                    // state.onChange(
+                                    //     "contact",
+                                    //     state.userDetailState!.data!.student!
+                                    //             .contact ??
+                                    //         "");
+                                    // onTextEdit(
+                                    //     "contact",
+                                    //     state.userDetailState!.data!.student
+                                    //             ?.contact
+                                    //             .toString() ??
+                                    //         "");
                                   },
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/contact_icon.svg',
