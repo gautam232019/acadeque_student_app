@@ -5,10 +5,14 @@ import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterState extends BaseState {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Dio dio = getHttp();
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   bool hidePassword = true;
 
@@ -56,5 +60,52 @@ class RegisterState extends BaseState {
       ToastService().w("Please provide all fields!");
     }
     setLoading(false);
+  }
+
+  onGoogleSignup(context) async {
+    try {
+      final response = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await response!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      if (FirebaseAuth.instance.currentUser != null) {
+        final token = await FirebaseAuth.instance.currentUser!.getIdToken();
+        this.token = token;
+        notifyListeners();
+      }
+      onFinalSubmit(context);
+      // ignore: empty_catches
+    } catch (err) {}
+  }
+
+  // onFacebookSignup(context) async {
+  //   try {
+  //     final response = await FacebookAuth.instance.login(
+  //       permissions: ["public_profile", "email"],
+  //     );
+  //     final result = await FacebookAuth.instance.getUserData();
+  //     print(result);
+
+  //     print("yo response ho $response");
+  //   } catch (err) {
+  //     print("yo error ho $err");
+  //   }
+  // }
+
+  onFinalSubmit(context) async {
+    try {
+      final response = await dio
+          .get("/auth/provider?user=student&provider=google&idToken=$token");
+      LocalStorageService()
+          .write(LocalStorageKeys.accessToken, response.data["data"]);
+      Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+      setLoading(false);
+      // ignore: empty_catches
+    } catch (err) {
+      setLoading(false);
+    }
   }
 }

@@ -26,7 +26,9 @@ import 'package:acadeque_student_app/modules/welcome_screen/welcome_screen.dart'
 import 'package:acadeque_student_app/modules/welcome_screen/welcome_state.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_storage/get_storage.dart';
+
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +36,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
+  await FacebookAuth.instance.webInitialize(
+    appId: '378425844301044',
+    cookie: true,
+    xfbml: true,
+    version: "v13.0",
+  );
   runApp(const App());
 }
 

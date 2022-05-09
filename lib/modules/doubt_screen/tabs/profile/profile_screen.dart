@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            actions: <Widget>[
+            actions: [
               TextButton(
                 child: const Text('Update'),
                 onPressed: () {

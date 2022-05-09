@@ -29,8 +29,8 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Padding(
+                    children: const [
+                      Padding(
                         padding: EdgeInsets.only(top: 70.0),
                         child: Center(
                             child: Text(
@@ -42,29 +42,29 @@ class RegisterScreen extends StatelessWidget {
                               fontWeight: FontWeight.w700),
                         )),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 35,
                       ),
-                      Stack(
-                        children: [
-                          Image.asset('assets/images/upload.png'),
-                          const Positioned(
-                            child: Text(
-                              'Upload\nPhoto',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            top: 35,
-                            left: 30,
-                          ),
-                          Positioned(
-                            child: SvgPicture.asset(
-                              'assets/svg/upload.svg',
-                            ),
-                            top: 10,
-                            right: 0,
-                          ),
-                        ],
-                      ),
+                      // Stack(
+                      //   children: [
+                      //     Image.asset('assets/images/upload.png'),
+                      //     const Positioned(
+                      //       child: Text(
+                      //         'Upload\nPhoto',
+                      //         style: TextStyle(color: Colors.white),
+                      //       ),
+                      //       top: 35,
+                      //       left: 30,
+                      //     ),
+                      //     Positioned(
+                      //       child: SvgPicture.asset(
+                      //         'assets/svg/upload.svg',
+                      //       ),
+                      //       top: 10,
+                      //       right: 0,
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
@@ -200,7 +200,7 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 const Text(
-                  "or Sign Up With",
+                  "or Login With",
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 14,
@@ -213,7 +213,9 @@ class RegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        state.onGoogleSignup(context);
+                      },
                       child: Container(
                         height: 48,
                         width: 126,
@@ -251,7 +253,9 @@ class RegisterScreen extends StatelessWidget {
                       width: 10,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        // state.onFacebookSignup(context);
+                      },
                       child: Container(
                         height: 48,
                         width: 126,
@@ -302,7 +306,9 @@ class RegisterScreen extends StatelessWidget {
                           color: Color(0xFF919191)),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: SizedBox(
                         height: 48,
                         width: 60,

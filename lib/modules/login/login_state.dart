@@ -5,6 +5,7 @@ import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginState extends BaseState {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -57,6 +58,27 @@ class LoginState extends BaseState {
     } catch (err) {
       ToastService().e(err.toString());
     }
+  }
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  onGoogleSignup(context) async {
+    try {
+      final response = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await response!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      if (FirebaseAuth.instance.currentUser != null) {
+        final token = await FirebaseAuth.instance.currentUser!.getIdToken();
+        this.token = token;
+        notifyListeners();
+      }
+      onFinalSubmit(context);
+      // ignore: empty_catches
+    } catch (err) {}
   }
 
   onFinalSubmit(context) async {
