@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "883507109278-1rhjv8e071ilp4osr5bpf60mq252i2pm.apps.googleusercontent.com",
+          "client_id": "883507109278-vif06218clgj2scic9d8qc9lf6dub5jo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.acadeque_student_app",
-            "certificate_hash": "3e26fdb53188d8110b4e68f02fc135dbfd83b2b9"
+            "certificate_hash": "3450a7c1d79ffdd83708f164996f6413dd8d67b3"
           }
         },
         {
