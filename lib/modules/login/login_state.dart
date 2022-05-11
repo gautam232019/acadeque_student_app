@@ -75,10 +75,13 @@ class LoginState extends BaseState {
         final token = await FirebaseAuth.instance.currentUser!.getIdToken();
         this.token = token;
         notifyListeners();
+        print(token);
       }
       onFinalSubmit(context);
       // ignore: empty_catches
-    } catch (err) {}
+    } catch (err) {
+      print(err);
+    }
   }
 
   onFinalSubmit(context) async {
@@ -88,14 +91,14 @@ class LoginState extends BaseState {
       String? storedEmail = LocalStorageService().read(LocalStorageKeys.email);
       if (storedEmail == finalEmail) {
         final response = await dio.get(
-            "/auth/provider?user=student&provider=password&idToken=$token&name=$name");
+            "/auth/provider?user=student&provider=google&idToken=$token&name=$name");
         LocalStorageService()
             .write(LocalStorageKeys.accessToken, response.data["data"]);
         Navigator.pushNamedAndRemoveUntil(
             context, '/welcome', (route) => false);
       } else {
-        final response = await dio.get(
-            "/auth/provider?user=student&provider=password&idToken=$token");
+        final response = await dio
+            .get("/auth/provider?user=student&provider=google&idToken=$token");
         LocalStorageService()
             .write(LocalStorageKeys.accessToken, response.data["data"]);
         Navigator.pushNamedAndRemoveUntil(
@@ -103,8 +106,9 @@ class LoginState extends BaseState {
       }
       setLoading(false);
       // ignore: empty_catches
-    } catch (err) {
+    } on DioError catch (err) {
       setLoading(false);
+      print(err.response);
     }
   }
 }
