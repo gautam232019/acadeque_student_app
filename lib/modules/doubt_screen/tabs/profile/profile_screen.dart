@@ -59,6 +59,72 @@ class ProfileScreen extends StatelessWidget {
       );
     }
 
+    onPasswordEdit() {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: true, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Password Change'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  TextFormField(
+                    onChanged: (val) {
+                      state.onOldPasswordChange(val);
+                    },
+                    decoration: const InputDecoration(
+                      hintText: '',
+                      label: Text("Old password"),
+                      hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17.5,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold),
+                      labelStyle: TextStyle(
+                          color: Color(0xFFA1A1A1),
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                  xsHeightSpan,
+                  TextFormField(
+                    onChanged: (val) {
+                      state.onNewPasswordChange(val);
+                    },
+                    decoration: const InputDecoration(
+                      hintText: '',
+                      label: Text("New password"),
+                      hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17.5,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold),
+                      labelStyle: TextStyle(
+                          color: Color(0xFFA1A1A1),
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('Update'),
+                onPressed: () {
+                  state.onPasswordUpdate();
+                  Navigator.of(context).pop(true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -324,10 +390,15 @@ class ProfileScreen extends StatelessWidget {
                                       "",
                                 ),
                                 DividerLine(),
-                                const ProfileRow(
-                                  iconPath: 'assets/svg/password_icon.svg',
-                                  title: 'Password',
-                                  value: 'Updated 2 weeks ago',
+                                InkWell(
+                                  onTap: () {
+                                    onPasswordEdit();
+                                  },
+                                  child: const ProfileRow(
+                                    iconPath: 'assets/svg/password_icon.svg',
+                                    title: 'Password',
+                                    value: 'Updated 2 weeks ago',
+                                  ),
                                 ),
                                 DividerLine(),
                                 InkWell(

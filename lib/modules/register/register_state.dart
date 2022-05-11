@@ -54,6 +54,7 @@ class RegisterState extends BaseState {
         LocalStorageService().write(LocalStorageKeys.email, email);
         Navigator.pop(context);
       } catch (err) {
+        print(err);
         ToastService().e(err.toString());
       }
     } else {
