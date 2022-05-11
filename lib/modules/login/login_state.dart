@@ -75,13 +75,10 @@ class LoginState extends BaseState {
         final token = await FirebaseAuth.instance.currentUser!.getIdToken();
         this.token = token;
         notifyListeners();
-        print(token);
       }
       onFinalSubmit(context);
       // ignore: empty_catches
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 
   onFinalSubmit(context) async {
@@ -108,7 +105,6 @@ class LoginState extends BaseState {
       // ignore: empty_catches
     } on DioError catch (err) {
       setLoading(false);
-      print(err.response);
     }
   }
 }
