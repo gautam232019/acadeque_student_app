@@ -59,7 +59,8 @@ class _TutorProfileState extends State<TutorProfile> {
                   if (widget.teacherItem!.hourlyRate == 0)
                     const Text("Not rated")
                   else
-                    Text("\$${widget.teacherItem!.hourlyRate.toString()}/hr"),
+                    Text(
+                        "\INR ${widget.teacherItem!.hourlyRate.toString()}/hr"),
                   xsHeightSpan,
                   const Text(
                     'Expertise',
