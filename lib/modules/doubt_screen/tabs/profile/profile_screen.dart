@@ -125,6 +125,92 @@ class ProfileScreen extends StatelessWidget {
       );
     }
 
+    onContactEdit() {
+      return showDialog<bool>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return StatefulBuilder(builder: ((context, setState) {
+              return AlertDialog(
+                title: const Text('Edit'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      TextFormField(
+                        onChanged: (val) {
+                          state.onContactChange(val);
+                        },
+                        decoration: const InputDecoration(
+                          hintText: '',
+                          label: Text("Phone Number"),
+                          hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17.5,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold),
+                          labelStyle: TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14),
+                        ),
+                      ),
+                      if (state.contactUpdateLoading == true)
+                        const SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      xsHeightSpan,
+                      SizedBox(
+                        child: TextFormField(
+                          onChanged: (val) {
+                            state.onCodeSmsChange(val);
+                          },
+                          decoration: const InputDecoration(
+                            hintText: '',
+                            label: Text("OTP"),
+                            hintStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17.5,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold),
+                            labelStyle: TextStyle(
+                                color: Color(0xFFA1A1A1),
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                        ),
+                      ),
+                      // if (state.contactUpdateLoading == true)
+                      //   const CircularProgressIndicator()
+                    ],
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text("Get Otp"),
+                    onPressed: () {
+                      state.sendOtp();
+                      // Navigator.of(context).pop(true);
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Submit'),
+                    onPressed: () {
+                      state.onContactUpdateSubmit(context);
+                      // Navigator.of(context).pop(true);
+                    },
+                  ),
+                ],
+              );
+            }));
+          });
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -403,27 +489,7 @@ class ProfileScreen extends StatelessWidget {
                                 DividerLine(),
                                 InkWell(
                                   onTap: () {
-                                    // state.onChange(
-                                    //     "name",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .name ??
-                                    //         "");
-                                    // state.onChange(
-                                    //     "email",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .email ??
-                                    //         "");
-                                    // state.onChange(
-                                    //     "contact",
-                                    //     state.userDetailState!.data!.student!
-                                    //             .contact ??
-                                    //         "");
-                                    // onTextEdit(
-                                    //     "contact",
-                                    //     state.userDetailState!.data!.student
-                                    //             ?.contact
-                                    //             .toString() ??
-                                    //         "");
+                                    onContactEdit();
                                   },
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/contact_icon.svg',

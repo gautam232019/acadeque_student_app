@@ -190,4 +190,99 @@ class ProfileState extends BaseState {
     }
     setLoading(false);
   }
+
+  String contactNumber = "";
+
+  String codeSms = "";
+
+  onContactChange(val) {
+    contactNumber = val;
+    notifyListeners();
+  }
+
+  onCodeSmsChange(val) {
+    codeSms = val;
+    notifyListeners();
+  }
+
+  bool showOtpField = false;
+
+  bool contactUpdateLoading = false;
+
+  setShowOtpField(val) {
+    showOtpField = val;
+    notifyListeners();
+  }
+
+  setContactLoading(val) {
+    contactUpdateLoading = val;
+    notifyListeners();
+  }
+
+  String? submitVerificationId;
+
+  sendOtp() async {
+    if (contactNumber.isNotEmpty) {
+      try {
+        print("mah yaha xu");
+        contactUpdateLoading == true;
+        notifyListeners();
+        print(contactUpdateLoading);
+        FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: "+977 $contactNumber",
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            final user =
+                await FirebaseAuth.instance.signInWithCredential(credential);
+            if (user.user != null) {
+              ToastService().s("Successfull!");
+            }
+          },
+          verificationFailed: (FirebaseAuthException exception) {
+            ToastService().e(exception.message!);
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            print("mah aaile yaha xu");
+            setShowOtpField(true);
+            submitVerificationId = verificationId;
+            notifyListeners();
+            ToastService().s("Otp sent!");
+          },
+          codeAutoRetrievalTimeout: (val) {},
+        );
+      } catch (err) {
+        ToastService().e(err.toString());
+      }
+    } else {
+      ToastService().w("Please provide contact!");
+    }
+  }
+
+  onContactUpdateSubmit(context) async {
+    if (submitVerificationId != null && codeSms.isNotEmpty) {
+      try {
+        final response = PhoneAuthProvider.credential(
+            verificationId: submitVerificationId!, smsCode: codeSms);
+        await FirebaseAuth.instance.signInWithCredential(response);
+        final token = await FirebaseAuth.instance.currentUser!.getIdToken();
+        this.token = token;
+        notifyListeners();
+        print(token);
+        sendContactNumber(context);
+      } catch (err) {
+        print(err);
+      }
+    } else {
+      ToastService().w("Please provide Otp!");
+    }
+  }
+
+  sendContactNumber(context) async {
+    try {
+      await dio.patch("/auth/updatecontact?idToken=$token");
+      ToastService().s("Contact Successfully added!");
+      Navigator.pop(context);
+      getUserDetail();
+      // ignore: empty_catches
+    } catch (err) {}
+  }
 }
