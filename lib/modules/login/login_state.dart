@@ -47,6 +47,7 @@ class LoginState extends BaseState {
       if (response.user!.emailVerified == false) {
         response.user!.sendEmailVerification();
         ToastService().w("Please verify your email!");
+        setLoading(false);
         return;
       }
       if (FirebaseAuth.instance.currentUser != null) {

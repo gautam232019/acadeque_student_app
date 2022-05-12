@@ -224,10 +224,8 @@ class ProfileState extends BaseState {
   sendOtp() async {
     if (contactNumber.isNotEmpty) {
       try {
-        print("mah yaha xu");
         contactUpdateLoading == true;
         notifyListeners();
-        print(contactUpdateLoading);
         FirebaseAuth.instance.verifyPhoneNumber(
           phoneNumber: "+977 $contactNumber",
           verificationCompleted: (PhoneAuthCredential credential) async {
@@ -241,7 +239,6 @@ class ProfileState extends BaseState {
             ToastService().e(exception.message!);
           },
           codeSent: (String verificationId, int? resendToken) {
-            print("mah aaile yaha xu");
             setShowOtpField(true);
             submitVerificationId = verificationId;
             notifyListeners();
@@ -266,11 +263,9 @@ class ProfileState extends BaseState {
         final token = await FirebaseAuth.instance.currentUser!.getIdToken();
         this.token = token;
         notifyListeners();
-        print(token);
         sendContactNumber(context);
-      } catch (err) {
-        print(err);
-      }
+        // ignore: empty_catches
+      } catch (err) {}
     } else {
       ToastService().w("Please provide Otp!");
     }
@@ -284,5 +279,27 @@ class ProfileState extends BaseState {
       getUserDetail();
       // ignore: empty_catches
     } catch (err) {}
+  }
+
+  String newEmail = "";
+  onNewEmailChange(val) {
+    newEmail = val;
+    notifyListeners();
+  }
+
+  onNewEmailUpdateSubmit(context) async {
+    if (newEmail.isNotEmpty) {
+      try {
+        final data = {
+          "email": newEmail,
+        };
+        final response = await dio.patch("/auth/updateemail", data: data);
+        print(response.data);
+      } catch (err) {
+        print(err);
+      }
+    } else {
+      ToastService().w("Please provide email!");
+    }
   }
 }

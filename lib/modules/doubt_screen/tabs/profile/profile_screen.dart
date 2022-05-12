@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
         barrierDismissible: true, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Edit'),
+            title: const Text('Name edit'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -51,6 +51,52 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   state.onEditSubmit();
                   Navigator.of(context).pop(true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    onEmailEdit() {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: true, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Email update'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  TextFormField(
+                    onChanged: (val) {
+                      state.onNewEmailChange(val);
+                    },
+                    decoration: const InputDecoration(
+                      hintText: '',
+                      label: Text("EMAIL"),
+                      hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17.5,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold),
+                      labelStyle: TextStyle(
+                          color: Color(0xFFA1A1A1),
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('Update'),
+                onPressed: () {
+                  state.onNewEmailUpdateSubmit(context);
+                  // Navigator.of(context).pop(true);
                 },
               ),
             ],
@@ -132,7 +178,7 @@ class ProfileScreen extends StatelessWidget {
           builder: (BuildContext context) {
             return StatefulBuilder(builder: ((context, setState) {
               return AlertDialog(
-                title: const Text('Edit'),
+                title: const Text('Contact update'),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
@@ -468,12 +514,17 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                                 DividerLine(),
-                                ProfileRow(
-                                  iconPath: 'assets/svg/email_icon.svg',
-                                  title: 'E-mail',
-                                  value: state.userDetailState?.data?.student!
-                                          .email ??
-                                      "",
+                                InkWell(
+                                  onTap: () {
+                                    onEmailEdit();
+                                  },
+                                  child: ProfileRow(
+                                    iconPath: 'assets/svg/email_icon.svg',
+                                    title: 'E-mail',
+                                    value: state.userDetailState?.data?.student!
+                                            .email ??
+                                        "",
+                                  ),
                                 ),
                                 DividerLine(),
                                 InkWell(
