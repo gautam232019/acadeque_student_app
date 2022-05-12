@@ -284,13 +284,31 @@ class BookAppointmentScreen extends StatelessWidget {
                                               .toList();
                                           return kera[0]!.contains(date.day);
                                         },
-                                        firstDate: DateTime(
-                                          state.teacherScheduleState?.data
-                                                  ?.schedules!.first.year ??
-                                              DateTime.now().year,
-                                          state.initialMonth!,
-                                        ),
-                                        lastDate: DateTime(
+                                        firstDate:
+                                            state.selectedAppointmentDate ??
+                                                DateTime(
+                                                  state
+                                                      .teacherScheduleState!
+                                                      .data!
+                                                      .schedules!
+                                                      .first
+                                                      .year!,
+                                                  state.initialMonth ?? 0,
+                                                  state.initialDay ?? 0,
+                                                ),
+                                        lastDate:
+                                            // state.selectedAppointmentDate ??
+                                            //     DateTime(
+                                            //       state
+                                            //           .teacherScheduleState!
+                                            //           .data!
+                                            //           .schedules!
+                                            //           .first
+                                            //           .year!,
+                                            //       state.initialMonth ?? 0,
+                                            //       state.initialDay ?? 0,
+                                            //     ).add(Duration(days: 60))
+                                            DateTime(
                                           state.teacherScheduleState!.data!
                                               .schedules!.last.year!,
                                           state.teacherScheduleState!.data!
