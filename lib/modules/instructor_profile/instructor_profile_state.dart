@@ -79,4 +79,11 @@ class InstructorProfileState extends BaseState {
       } catch (err) {}
     }
   }
+
+  bool showMore = false;
+
+  setShowMore(val) {
+    showMore = val;
+    notifyListeners();
+  }
 }

@@ -324,30 +324,47 @@ class InstructorProfileScreen extends StatelessWidget {
                                   fontFamily: 'Rubik',
                                   color: Colors.black),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              state.teacherProfileState?.data?.teacher!
-                                      .description ??
-                                  "No descripttion",
-                              style: const TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color.fromARGB(255, 80, 79, 79),
-                                  letterSpacing: 0.25),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            const Text(
-                              'Show More',
-                              style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 14,
-                                  color: Color(0xFF1F5567),
-                                  fontWeight: FontWeight.bold),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    state.teacherProfileState?.data?.teacher!
+                                            .description ??
+                                        "No descripttion",
+                                    overflow: state.showMore == true
+                                        ? TextOverflow.visible
+                                        : TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        color: Color.fromARGB(255, 80, 79, 79),
+                                        letterSpacing: 0.25),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                if (state.showMore == false)
+                                  InkWell(
+                                    onTap: () {
+                                      state.setShowMore(true);
+                                    },
+                                    child: const Text(
+                                      'Show More',
+                                      style: TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize: 14,
+                                          color: Color(0xFF1F5567),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                              ],
                             ),
                             DividerLine(),
                             const Text(

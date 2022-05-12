@@ -9,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'divider_line.dart';
 
 class InstructorProfileScreen extends StatefulWidget {
+  const InstructorProfileScreen({Key? key}) : super(key: key);
+
   @override
   _InstructorProfileScreenState createState() =>
       _InstructorProfileScreenState();
