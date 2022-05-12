@@ -24,10 +24,10 @@ class TutoringScreen extends StatelessWidget {
         create: (_) => TutorHomeState(),
         child: const TutorHomeScreen(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => StatState(),
-        child: const StatScreen(),
-      ),
+      // ChangeNotifierProvider(
+      //   create: (_) => StatState(),
+      //   child: const StatScreen(),
+      // ),
       ChangeNotifierProvider(
         create: (_) => AppointmentState(),
         child: const AppointmentScreen(),
@@ -72,11 +72,23 @@ class TutoringScreen extends StatelessWidget {
                   ),
                   label: "home",
                 ),
+                // BottomNavigationBarItem(
+                //   icon: Padding(
+                //     padding: const EdgeInsets.all(20),
+                //     child: SvgPicture.asset(
+                //       'assets/svg/search_icon.svg',
+                //       color: state.bottomIndex == 1
+                //           ? const Color(0xFF59AEFD)
+                //           : const Color(0xFFA6A6A6),
+                //     ),
+                //   ),
+                //   label: "ask",
+                // ),
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(20),
                     child: SvgPicture.asset(
-                      'assets/svg/search_icon.svg',
+                      'assets/svg/appointment_icon.svg',
                       color: state.bottomIndex == 1
                           ? const Color(0xFF59AEFD)
                           : const Color(0xFFA6A6A6),
@@ -88,20 +100,8 @@ class TutoringScreen extends StatelessWidget {
                   icon: Padding(
                     padding: const EdgeInsets.all(20),
                     child: SvgPicture.asset(
-                      'assets/svg/appointment_icon.svg',
-                      color: state.bottomIndex == 2
-                          ? const Color(0xFF59AEFD)
-                          : const Color(0xFFA6A6A6),
-                    ),
-                  ),
-                  label: "ask",
-                ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: SvgPicture.asset(
                       'assets/svg/person.svg',
-                      color: state.bottomIndex == 3
+                      color: state.bottomIndex == 2
                           ? const Color(0xFF59AEFD)
                           : const Color(0xFFA6A6A6),
                     ),
