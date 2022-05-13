@@ -40,11 +40,24 @@ class RegisterState extends BaseState {
     notifyListeners();
   }
 
+  String verifyEmail = "";
+  String verifyPassword = "";
+
+  onVerifyEmailChange(val) {
+    verifyEmail = val;
+    notifyListeners();
+  }
+
+  onVerifyPasswordChange(val) {
+    verifyPassword = val;
+    notifyListeners();
+  }
+
   String? token;
 
   onSubmit(context) async {
     setLoading(true);
-    if (userName.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+    if (formKey.currentState!.validate()) {
       try {
         final result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
@@ -54,11 +67,10 @@ class RegisterState extends BaseState {
         LocalStorageService().write(LocalStorageKeys.email, email);
         Navigator.pop(context);
       } catch (err) {
-        print(err);
         ToastService().e(err.toString());
       }
     } else {
-      ToastService().w("Please provide all fields!");
+      ToastService().w("Please validate all fields!");
     }
     setLoading(false);
   }

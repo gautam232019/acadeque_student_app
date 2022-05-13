@@ -127,6 +127,35 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
+                      onChanged: state.onVerifyEmailChange,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter email!";
+                        } else if (val != state.email) {
+                          return "Email does not matchh!";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                          labelText: "Verify Email",
+                          hintText: '',
+                          hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold),
+                          labelStyle: TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+                  child: TextFormField(
                       obscureText: state.hidePassword,
                       onChanged: state.onPasswordChange,
                       validator: (val) {
@@ -143,6 +172,42 @@ class RegisterScreen extends StatelessWidget {
                             onTap: state.changeVisibility,
                           ),
                           labelText: "Create Password",
+                          hintText: '',
+                          hintStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold),
+                          labelStyle: const TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          border: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+                  child: TextFormField(
+                      obscureText: state.hidePassword,
+                      onChanged: state.onVerifyPasswordChange,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter password!";
+                        } else if (val != state.password) {
+                          return "Password does not match!";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          suffixIcon: InkWell(
+                            child: state.hidePassword
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility),
+                            onTap: state.changeVisibility,
+                          ),
+                          labelText: "Verify Password",
                           hintText: '',
                           hintStyle: const TextStyle(
                               color: Colors.black,
