@@ -47,13 +47,7 @@ class RegisterState extends BaseState {
     notifyListeners();
   }
 
-  String verifyEmail = "";
   String verifyPassword = "";
-
-  onVerifyEmailChange(String val) {
-    verifyEmail = val.replaceAll(' ', '');
-    notifyListeners();
-  }
 
   onVerifyPasswordChange(val) {
     verifyPassword = val;
@@ -80,7 +74,8 @@ class RegisterState extends BaseState {
         ToastService().e(err.message!);
       }
     } else {
-      ToastService().w("Please validate all fields!");
+      ToastService().w(
+          "Please validate all fields and Password must contain uppercase, lowercase, number and character!");
     }
     setLoading(false);
   }

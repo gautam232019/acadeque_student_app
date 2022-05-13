@@ -74,6 +74,9 @@ class ProfileState extends BaseState {
     getUserDetail();
   }
 
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
+
   String? token;
   String id = "";
 
@@ -172,22 +175,28 @@ class ProfileState extends BaseState {
     notifyListeners();
   }
 
-  onPasswordUpdate() async {
+  onPasswordUpdate(context) async {
     setLoading(true);
     if (oldPassword.isNotEmpty && newPassword.isNotEmpty) {
-      try {
-        final user = FirebaseAuth.instance.currentUser;
-        final cred = EmailAuthProvider.credential(
-            email: userDetailState!.data!.student!.email!,
-            password: oldPassword);
+      if (formKey.currentState!.validate()) {
+        try {
+          final user = FirebaseAuth.instance.currentUser;
+          final cred = EmailAuthProvider.credential(
+              email: userDetailState!.data!.student!.email!,
+              password: oldPassword);
 
-        final result = await user!.reauthenticateWithCredential(cred);
-        if (result.user != null) {
-          await result.user!.updatePassword(newPassword);
-          ToastService().s("Password changed successfully!");
+          final result = await user!.reauthenticateWithCredential(cred);
+          if (result.user != null) {
+            await result.user!.updatePassword(newPassword);
+            ToastService().s("Password changed successfully!");
+            Navigator.of(context).pop(true);
+          }
+        } catch (err) {
+          ToastService().e(err.toString());
+          Navigator.of(context).pop(true);
         }
-      } catch (err) {
-        ToastService().e(err.toString());
+      } else {
+        ToastService().w("z");
       }
     } else {
       ToastService().w("Please provide password!");
@@ -293,16 +302,18 @@ class ProfileState extends BaseState {
 
   onNewEmailUpdateSubmit(context) async {
     if (newEmail.isNotEmpty) {
-      try {
-        final data = {
-          "email": newEmail,
-        };
-        await dio.patch("/auth/updateemail", data: data);
-        ToastService().s("Success updating mail! please verify email!");
-        Navigator.pop(context);
-        getUserDetail();
-        // ignore: empty_catches
-      } catch (err) {}
+      if (emailFormKey.currentState!.validate()) {
+        try {
+          final data = {
+            "email": newEmail,
+          };
+          await dio.patch("/auth/updateemail", data: data);
+          ToastService().s("Success updating mail! please verify email!");
+          Navigator.pop(context);
+          getUserDetail();
+          // ignore: empty_catches
+        } catch (err) {}
+      }
     } else {
       ToastService().w("Please provide email!");
     }

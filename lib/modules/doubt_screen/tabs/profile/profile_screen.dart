@@ -68,28 +68,42 @@ class ProfileScreen extends StatelessWidget {
           return AlertDialog(
             title: const Text('Email update'),
             content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  TextFormField(
-                    onChanged: (val) {
-                      state.onNewEmailChange(val);
-                    },
-                    decoration: const InputDecoration(
-                      hintText: '',
-                      label: Text("EMAIL"),
-                      hintStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17.5,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold),
-                      labelStyle: TextStyle(
-                          color: Color(0xFFA1A1A1),
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
-                    ),
-                  )
-                ],
+              child: Form(
+                key: state.emailFormKey,
+                child: ListBody(
+                  children: <Widget>[
+                    TextFormField(
+                      onChanged: (val) {
+                        state.onNewEmailChange(val);
+                      },
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter email!";
+                        } else if (RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(val) ==
+                            false) {
+                          return "Plesae enter valid email";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '',
+                        label: Text("EMAIL"),
+                        hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17.5,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            color: Color(0xFFA1A1A1),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             actions: [
@@ -114,56 +128,69 @@ class ProfileScreen extends StatelessWidget {
           return AlertDialog(
             title: const Text('Password Change'),
             content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  TextFormField(
-                    onChanged: (val) {
-                      state.onOldPasswordChange(val);
-                    },
-                    decoration: const InputDecoration(
-                      hintText: '',
-                      label: Text("Old password"),
-                      hintStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17.5,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold),
-                      labelStyle: TextStyle(
-                          color: Color(0xFFA1A1A1),
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
+              child: Form(
+                key: state.formKey,
+                child: ListBody(
+                  children: <Widget>[
+                    TextFormField(
+                      onChanged: (val) {
+                        state.onOldPasswordChange(val);
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '',
+                        label: Text("Old password"),
+                        hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17.5,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            color: Color(0xFFA1A1A1),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      ),
                     ),
-                  ),
-                  xsHeightSpan,
-                  TextFormField(
-                    onChanged: (val) {
-                      state.onNewPasswordChange(val);
-                    },
-                    decoration: const InputDecoration(
-                      hintText: '',
-                      label: Text("New password"),
-                      hintStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17.5,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold),
-                      labelStyle: TextStyle(
-                          color: Color(0xFFA1A1A1),
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
-                    ),
-                  )
-                ],
+                    xsHeightSpan,
+                    TextFormField(
+                      onChanged: (val) {
+                        state.onNewPasswordChange(val);
+                      },
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return "Please enter password!";
+                        } else if (RegExp(
+                                    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)")
+                                .hasMatch(val) ==
+                            false) {
+                          return "Please is week!";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '',
+                        label: Text("New password"),
+                        hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17.5,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            color: Color(0xFFA1A1A1),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             actions: [
               TextButton(
                 child: const Text('Update'),
                 onPressed: () {
-                  state.onPasswordUpdate();
-                  Navigator.of(context).pop(true);
+                  state.onPasswordUpdate(context);
                 },
               ),
             ],

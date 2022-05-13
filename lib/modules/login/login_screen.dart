@@ -46,12 +46,17 @@ class LoginScreen extends StatelessWidget {
                           onChanged: state.onUserNameChange,
                           validator: (val) {
                             if (val == null || val.isEmpty) {
-                              return "Please enter username or email!";
+                              return "Please enter email!";
+                            } else if (RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(val) ==
+                                false) {
+                              return "Plesae enter valid email";
                             }
                             return null;
                           },
                           decoration: const InputDecoration(
-                            labelText: "Username or Email",
+                            labelText: "Email",
                             hintText: '',
                             hintStyle: TextStyle(
                                 color: Colors.black,

@@ -34,32 +34,34 @@ class LoginState extends BaseState {
   String? token;
 
   onSubmit(context) async {
-    setLoading(true);
-    try {
-      final finalEmail = userName.replaceAll(' ', '');
-      final response = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: finalEmail, password: password);
-      if (FirebaseAuth.instance.currentUser != null) {
-        final token = await FirebaseAuth.instance.currentUser!.getIdToken();
-        this.token = token;
-        notifyListeners();
-      }
-      if (response.user!.emailVerified == false) {
-        response.user!.sendEmailVerification();
-        ToastService().w("Please verify your email!");
+    if (formKey.currentState!.validate()) {
+      setLoading(true);
+      try {
+        final finalEmail = userName.replaceAll(' ', '');
+        final response = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: finalEmail, password: password);
+        if (FirebaseAuth.instance.currentUser != null) {
+          final token = await FirebaseAuth.instance.currentUser!.getIdToken();
+          this.token = token;
+          notifyListeners();
+        }
+        if (response.user!.emailVerified == false) {
+          response.user!.sendEmailVerification();
+          ToastService().w("Please verify your email!");
+          setLoading(false);
+          return;
+        }
+        if (FirebaseAuth.instance.currentUser != null) {
+          final token = await FirebaseAuth.instance.currentUser!.getIdToken();
+          this.token = token;
+          notifyListeners();
+        }
+        onFinalNativeSubmit(context);
+        // ignore: empty_catches
+      } on FirebaseAuthException catch (err) {
+        ToastService().e(err.message!);
         setLoading(false);
-        return;
       }
-      if (FirebaseAuth.instance.currentUser != null) {
-        final token = await FirebaseAuth.instance.currentUser!.getIdToken();
-        this.token = token;
-        notifyListeners();
-      }
-      onFinalNativeSubmit(context);
-      // ignore: empty_catches
-    } on FirebaseAuthException catch (err) {
-      ToastService().e(err.message!);
-      setLoading(false);
     }
   }
 
@@ -69,9 +71,6 @@ class LoginState extends BaseState {
       String? name = LocalStorageService().read(LocalStorageKeys.userName);
 
       String? storedEmail = LocalStorageService().read(LocalStorageKeys.email);
-      if (name != null) {
-        final finalName = name.replaceAll(' ', '');
-      }
       if (storedEmail == finalEmail) {
         final response = await dio.get(
             "/auth/provider?user=student&provider=password&idToken=$token&name=$name");

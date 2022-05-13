@@ -104,6 +104,11 @@ class RegisterScreen extends StatelessWidget {
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return "Please enter email!";
+                        } else if (RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(val) ==
+                            false) {
+                          return "Plesae enter valid email";
                         }
                         return null;
                       },
@@ -127,41 +132,16 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
-                      onChanged: state.onVerifyEmailChange,
-                      validator: (val) {
-                        if (val == null || val.isEmpty) {
-                          return "Please enter email!";
-                        } else if (val.replaceAll(' ', '') !=
-                            state.email.replaceAll(' ', '')) {
-                          return "Email does not match!";
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                          labelText: "Verify Email",
-                          hintText: '',
-                          hintStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold),
-                          labelStyle: TextStyle(
-                              color: Color(0xFFA1A1A1),
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                          border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)))),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
-                  child: TextFormField(
                       obscureText: state.hidePassword,
                       onChanged: state.onPasswordChange,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return "Please enter password!";
+                        } else if (RegExp(
+                                    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)")
+                                .hasMatch(val) ==
+                            false) {
+                          return "Password is week!";
                         }
                         return null;
                       },
