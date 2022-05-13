@@ -131,8 +131,9 @@ class RegisterScreen extends StatelessWidget {
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return "Please enter email!";
-                        } else if (val != state.email) {
-                          return "Email does not matchh!";
+                        } else if (val.replaceAll(' ', '') !=
+                            state.email.replaceAll(' ', '')) {
+                          return "Email does not match!";
                         }
                         return null;
                       },
@@ -190,7 +191,7 @@ class RegisterScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
-                      obscureText: state.hidePassword,
+                      obscureText: state.hideVerifyPassword,
                       onChanged: state.onVerifyPasswordChange,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
@@ -202,10 +203,10 @@ class RegisterScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                           suffixIcon: InkWell(
-                            child: state.hidePassword
+                            child: state.hideVerifyPassword
                                 ? const Icon(Icons.visibility_off)
                                 : const Icon(Icons.visibility),
-                            onTap: state.changeVisibility,
+                            onTap: state.changeVerifyPasswordVisibility,
                           ),
                           labelText: "Verify Password",
                           hintText: '',

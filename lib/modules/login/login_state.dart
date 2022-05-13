@@ -57,8 +57,8 @@ class LoginState extends BaseState {
       }
       onFinalNativeSubmit(context);
       // ignore: empty_catches
-    } catch (err) {
-      ToastService().e(err.toString());
+    } on FirebaseAuthException catch (err) {
+      ToastService().e(err.message!);
       setLoading(false);
     }
   }
@@ -72,12 +72,12 @@ class LoginState extends BaseState {
       if (name != null) {
         final finalName = name.replaceAll(' ', '');
       }
-
       if (storedEmail == finalEmail) {
         final response = await dio.get(
             "/auth/provider?user=student&provider=password&idToken=$token&name=$name");
         LocalStorageService()
             .write(LocalStorageKeys.accessToken, response.data["data"]);
+        LocalStorageService().write(LocalStorageKeys.isNaviveProvider, "Yes");
         Navigator.pushNamedAndRemoveUntil(
             context, '/welcome', (route) => false);
       } else {
@@ -85,6 +85,7 @@ class LoginState extends BaseState {
             "/auth/provider?user=student&provider=password&idToken=$token");
         LocalStorageService()
             .write(LocalStorageKeys.accessToken, response.data["data"]);
+        LocalStorageService().write(LocalStorageKeys.isNaviveProvider, "Yes");
         Navigator.pushNamedAndRemoveUntil(
             context, '/welcome', (route) => false);
       }

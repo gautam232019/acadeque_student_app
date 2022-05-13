@@ -1,6 +1,7 @@
 import 'package:acadeque_student_app/common/ui/divider_line.dart';
 import 'package:acadeque_student_app/common/ui/profile_row.dart';
 import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
+import 'package:acadeque_student_app/core/services/local_storage_service.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/profile/profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -516,7 +517,11 @@ class ProfileScreen extends StatelessWidget {
                                 DividerLine(),
                                 InkWell(
                                   onTap: () {
-                                    onEmailEdit();
+                                    final result = LocalStorageService().read(
+                                        LocalStorageKeys.isNaviveProvider);
+                                    if (result != null) {
+                                      onEmailEdit();
+                                    }
                                   },
                                   child: ProfileRow(
                                     iconPath: 'assets/svg/email_icon.svg',
@@ -529,7 +534,11 @@ class ProfileScreen extends StatelessWidget {
                                 DividerLine(),
                                 InkWell(
                                   onTap: () {
-                                    onPasswordEdit();
+                                    final result = LocalStorageService().read(
+                                        LocalStorageKeys.isNaviveProvider);
+                                    if (result != null) {
+                                      onPasswordEdit();
+                                    }
                                   },
                                   child: const ProfileRow(
                                     iconPath: 'assets/svg/password_icon.svg',

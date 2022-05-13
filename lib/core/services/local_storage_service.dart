@@ -4,6 +4,7 @@ class LocalStorageKeys {
   static const accessToken = "token";
   static const userName = "name";
   static const email = "email";
+  static const isNaviveProvider = "isNativeProvider";
 }
 
 class LocalStorageService {

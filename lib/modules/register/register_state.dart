@@ -16,8 +16,15 @@ class RegisterState extends BaseState {
 
   bool hidePassword = true;
 
+  bool hideVerifyPassword = true;
+
   changeVisibility() {
     hidePassword = !hidePassword;
+    notifyListeners();
+  }
+
+  changeVerifyPasswordVisibility() {
+    hideVerifyPassword = !hideVerifyPassword;
     notifyListeners();
   }
 
@@ -43,8 +50,8 @@ class RegisterState extends BaseState {
   String verifyEmail = "";
   String verifyPassword = "";
 
-  onVerifyEmailChange(val) {
-    verifyEmail = val;
+  onVerifyEmailChange(String val) {
+    verifyEmail = val.replaceAll(' ', '');
     notifyListeners();
   }
 
@@ -59,15 +66,18 @@ class RegisterState extends BaseState {
     setLoading(true);
     if (formKey.currentState!.validate()) {
       try {
-        final result = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+        final result =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.replaceAll(' ', ''),
+          password: password.replaceAll(' ', ''),
+        );
         result.user!.sendEmailVerification();
         ToastService().s("Successfully registered!");
         LocalStorageService().write(LocalStorageKeys.userName, userName);
         LocalStorageService().write(LocalStorageKeys.email, email);
         Navigator.pop(context);
-      } catch (err) {
-        ToastService().e(err.toString());
+      } on FirebaseAuthException catch (err) {
+        ToastService().e(err.message!);
       }
     } else {
       ToastService().w("Please validate all fields!");
