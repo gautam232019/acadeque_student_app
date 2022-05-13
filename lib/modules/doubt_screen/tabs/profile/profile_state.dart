@@ -293,11 +293,12 @@ class ProfileState extends BaseState {
         final data = {
           "email": newEmail,
         };
-        final response = await dio.patch("/auth/updateemail", data: data);
-        print(response.data);
-      } catch (err) {
-        print(err);
-      }
+        await dio.patch("/auth/updateemail", data: data);
+        ToastService().s("Success updating mail! please verify email!");
+        Navigator.pop(context);
+        getUserDetail();
+        // ignore: empty_catches
+      } catch (err) {}
     } else {
       ToastService().w("Please provide email!");
     }
