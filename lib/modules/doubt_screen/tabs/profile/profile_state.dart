@@ -308,7 +308,7 @@ class ProfileState extends BaseState {
             "email": newEmail,
           };
           await dio.patch("/auth/updateemail", data: data);
-          ToastService().s("Success updating mail! please verify email!");
+          ToastService().s("Email id updated successfully!");
           Navigator.pop(context);
           getUserDetail();
           // ignore: empty_catches
