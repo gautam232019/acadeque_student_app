@@ -200,7 +200,9 @@ class LoginScreen extends StatelessWidget {
                               width: 10,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                state.onFacebookLogin(context);
+                              },
                               child: Container(
                                 height: 48,
                                 width: 126,

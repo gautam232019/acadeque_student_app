@@ -37,7 +37,7 @@ void main() async {
   await Firebase.initializeApp();
   await GetStorage.init();
   await FacebookAuth.instance.webInitialize(
-    appId: '378425844301044',
+    appId: '905242424206309',
     cookie: true,
     xfbml: true,
     version: "v13.0",

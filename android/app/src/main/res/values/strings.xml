@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">acadqie-auth</string>
+    <string name="facebook_app_id">905242424206309</string>
+    <string name="facebook_client_token">10822fbd0c6b13e96f200a1632be881a</string>
+</resources>

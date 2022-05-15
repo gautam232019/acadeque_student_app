@@ -196,7 +196,8 @@ class ProfileState extends BaseState {
           Navigator.of(context).pop(true);
         }
       } else {
-        ToastService().w("z");
+        ToastService().w(
+            "Password must contain uppercase, lowercase, number and character!");
       }
     } else {
       ToastService().w("Please provide password!");

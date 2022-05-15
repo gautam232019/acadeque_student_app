@@ -5,6 +5,7 @@ import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginState extends BaseState {
@@ -137,9 +138,21 @@ class LoginState extends BaseState {
             context, '/welcome', (route) => false);
       }
       setLoading(false);
-      // ignore: empty_catches
+      // ignore: empty_catches, unused_catch_clause
     } on DioError catch (err) {
       setLoading(false);
+    }
+  }
+
+  onFacebookLogin(context) async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login(
+        loginBehavior: LoginBehavior.webOnly,
+      );
+      print("yo token ho ${result.accessToken}");
+    } catch (err) {
+      print(err);
+      print("yo donco");
     }
   }
 }
