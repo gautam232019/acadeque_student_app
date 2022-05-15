@@ -456,8 +456,13 @@ class ProfileScreen extends StatelessWidget {
                                       height: 12,
                                     ),
                                     InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
+                                      onTap: () async {
+                                        const url =
+                                            'mailto: support@acadque.com';
+                                        if (await canLaunchUrl(
+                                            Uri.parse(url))) {
+                                          await launchUrl(Uri.parse(url));
+                                        }
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -575,7 +580,7 @@ class ProfileScreen extends StatelessWidget {
                                     child: const ProfileRow(
                                       iconPath: 'assets/svg/password_icon.svg',
                                       title: 'Password',
-                                      value: 'Updated 2 weeks ago',
+                                      value: '********',
                                     ),
                                   ),
                                   DividerLine(),
