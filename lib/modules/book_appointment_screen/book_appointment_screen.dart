@@ -118,6 +118,30 @@ class BookAppointmentScreen extends StatelessWidget {
                                 height: 20,
                               ),
                               const Text(
+                                'Select Subject',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Color.fromARGB(255, 24, 40, 53),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              DropdownButton(
+                                hint: const Text("Select subject"),
+                                value: state.selectedSubject,
+                                items: state.subjectState!.data!.subjects!
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        child: Text(e.name!),
+                                        value: e.sId,
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (val) {
+                                  state.onSubjectChange(val);
+                                },
+                              ),
+
+                              sHeightSpan,
+                              const Text(
                                 'Duration',
                                 style: TextStyle(
                                     fontSize: 17,

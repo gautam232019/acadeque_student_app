@@ -845,7 +845,7 @@ class InstructorProfileScreen extends StatelessWidget {
                               height: 10,
                             ),
                             const Text(
-                              'Connect Here',
+                              'Social Link',
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,

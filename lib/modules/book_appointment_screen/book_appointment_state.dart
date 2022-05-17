@@ -1,6 +1,7 @@
 import 'package:acadeque_student_app/core/http/http.dart';
 import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
+import 'package:acadeque_student_app/modules/add_question/models/subject_response.dart';
 import 'package:acadeque_student_app/modules/book_appointment_screen/models/booking_appointment_response.dart';
 import 'package:acadeque_student_app/modules/book_appointment_screen/models/teacher_schedule_response.dart';
 import 'package:acadeque_student_app/modules/book_appointment_screen/models/teacher_slot_response.dart';
@@ -45,6 +46,7 @@ class BookAppointmentState extends BaseState {
     name = args['name'];
     notifyListeners();
     getTeacherSchedule();
+    fetchSubjects();
   }
 
   TeacherScheduleResponse? teacherScheduleState;
@@ -59,17 +61,10 @@ class BookAppointmentState extends BaseState {
           await dio.get("/teachers/$id/schedules?year=${DateTime.now().year}");
       teacherScheduleState = TeacherScheduleResponse.fromJson(response.data);
       notifyListeners();
-      // selectedAppointmentDate = DateTime(
-      //   teacherScheduleState!.data!.schedules!.first.year!,
-      //   teacherScheduleState!.data!.schedules!.first.month!,
-      //   teacherScheduleState!.data!.schedules!.first.days![0],
-      // );
       final DateTime currentDate = DateTime.now();
       for (var item in teacherScheduleState!.data!.schedules!) {
         for (var smallItem in item.days!) {
           if (item.month! >= currentDate.month && smallItem > currentDate.day) {
-            print(item.month);
-            print(smallItem);
             initialDay = smallItem;
             initialMonth = item.month;
             break;
@@ -79,12 +74,10 @@ class BookAppointmentState extends BaseState {
           }
         }
       }
-      // print(teacherScheduleState!.data!.schedules!.last.month);
       notifyListeners();
       getTeacherSlots();
       // ignore: empty_catches
     } catch (err) {}
-    setLoading(false);
   }
 
   bool slotLoading = false;
@@ -96,11 +89,8 @@ class BookAppointmentState extends BaseState {
   getTeacherSlots() async {
     setSlotLoading(true);
     try {
-      // print(
-      // "/teachers/$id/schedules/slots?year=${selectedAppointmentDate?.year}&month=${selectedAppointmentDate?.month}&day=${selectedAppointmentDate?.day}&duration=${appointmentDuration == "15 Mins" ? "15" : appointmentDuration == "30 Mins" ? "30" : "60"}");
       final response = await dio.get(
           "/teachers/$id/schedules/slots?year=${selectedAppointmentDate!.year}&month=${selectedAppointmentDate!.month}&day=${selectedAppointmentDate!.day}&duration=${appointmentDuration == "15 Mins" ? "15" : appointmentDuration == "30 Mins" ? "30" : "60"}");
-      // print(response.data);
       teacherSlotState = TeacherSlotResponse.fromJson(response.data);
       notifyListeners();
       // ignore: empty_catches
@@ -146,5 +136,23 @@ class BookAppointmentState extends BaseState {
       ToastService().w("Please select time slot!");
     }
     setSubmitLoading(false);
+  }
+
+  SubjectResponse? subjectState;
+
+  String? selectedSubject;
+
+  onSubjectChange(val) {
+    selectedSubject = val;
+    notifyListeners();
+  }
+
+  fetchSubjects() async {
+    try {
+      final response = await dio.get("/subjects");
+      subjectState = SubjectResponse.fromJson(response.data);
+      // ignore: empty_catches
+    } catch (err) {}
+    setLoading(false);
   }
 }
