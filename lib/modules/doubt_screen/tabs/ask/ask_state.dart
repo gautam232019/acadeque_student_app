@@ -32,14 +32,11 @@ class AskState extends BaseState {
   getQuestions() async {
     setLoading(true);
     try {
-      print("yo token ho $id");
       final response = await dio.get("/students/$id/questions");
       studentQuestionsState = StudentQuestionResponse.fromJson(response.data);
       notifyListeners();
       // ignore: empty_catches
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
     setLoading(false);
   }
 }

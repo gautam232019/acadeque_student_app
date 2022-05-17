@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors,  prefer_const_literals_to_create_immutables
 
+import 'package:acadeque_student_app/common/ui/ui_helpers.dart';
 import 'package:acadeque_student_app/common/utils/colors_util.dart';
-import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
+import 'package:acadeque_student_app/modules/question_screen/models/single_question_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class QuestionWidget extends StatelessWidget {
-  final Questions questionItem;
+  final Question questionItem;
 
   const QuestionWidget({Key? key, required this.questionItem})
       : super(key: key);
@@ -60,7 +61,7 @@ class QuestionWidget extends StatelessWidget {
             height: 15,
           ),
           Text(
-            questionItem.solved == true ? "Solved" : "Not solved",
+            questionItem.answers!.first.answer!,
             style: TextStyle(
                 color: colorTextLight,
                 height: 1.5,
@@ -71,6 +72,21 @@ class QuestionWidget extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
+          Row(
+            children: [
+              Text(
+                'Answered by:',
+                style: TextStyle(
+                    color: colorCorrect,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto'),
+              ),
+              sWidthSpan,
+              Text(questionItem.answers!.first.teacherId!.name!)
+            ],
+          ),
+          lHeightSpan,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

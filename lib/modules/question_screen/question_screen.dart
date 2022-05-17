@@ -79,7 +79,8 @@ class QuestionScreen extends StatelessWidget {
                               child: CircularProgressIndicator(),
                             )
                           : QuestionWidget(
-                              questionItem: state.item!,
+                              questionItem:
+                                  state.questionState!.data!.question!.first,
                             ),
                     ))
               ],

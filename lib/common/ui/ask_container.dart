@@ -15,7 +15,9 @@ class AskContainer extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
           child: InkWell(
-            onTap: () async {},
+            onTap: () async {
+              Navigator.pushNamed(context, "/question_screen", arguments: item);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +74,7 @@ class AskContainer extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "kera",
+                        item!.subjectId!.name!,
                         style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
