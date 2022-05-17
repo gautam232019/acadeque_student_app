@@ -132,6 +132,7 @@ class LoginState extends BaseState {
       } else {
         final response = await dio
             .get("/auth/provider?user=student&provider=google&idToken=$token");
+        print(response.data["data"]);
         LocalStorageService()
             .write(LocalStorageKeys.accessToken, response.data["data"]);
         Navigator.pushNamedAndRemoveUntil(

@@ -152,8 +152,10 @@ class Answers {
   StudentId? teacherId;
   String? answer;
   String? createdAt;
+  RatingId? ratingId;
 
-  Answers({this.sId, this.teacherId, this.answer, this.createdAt});
+  Answers(
+      {this.sId, this.teacherId, this.answer, this.createdAt, this.ratingId});
 
   Answers.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -162,6 +164,9 @@ class Answers {
         : null;
     answer = json['answer'];
     createdAt = json['createdAt'];
+    ratingId = json['ratingId'] != null
+        ? new RatingId.fromJson(json['ratingId'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -172,6 +177,28 @@ class Answers {
     }
     data['answer'] = this.answer;
     data['createdAt'] = this.createdAt;
+    if (this.ratingId != null) {
+      data['ratingId'] = this.ratingId!.toJson();
+    }
+    return data;
+  }
+}
+
+class RatingId {
+  String? sId;
+  num? rating;
+
+  RatingId({this.sId, this.rating});
+
+  RatingId.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    rating = json['rating'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['rating'] = this.rating;
     return data;
   }
 }

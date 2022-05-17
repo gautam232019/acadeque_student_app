@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:acadeque_student_app/core/http/http.dart';
+import 'package:acadeque_student_app/core/services/toast_service.dart';
 import 'package:acadeque_student_app/core/state/base_state.dart';
 import 'package:acadeque_student_app/modules/doubt_screen/tabs/ask/models/student_question_response.dart';
 import 'package:acadeque_student_app/modules/question_screen/models/single_question_response.dart';
@@ -28,5 +29,20 @@ class QuestionState extends BaseState {
       // ignore: empty_catches
     } catch (err) {}
     setLoading(false);
+  }
+
+  onAddRating(satisfaction) async {
+    try {
+      var data = {
+        "rateTo": "answer",
+        "rateToId": questionState!.data!.question!.first.answers!.first.sId,
+        "satisfaction": satisfaction,
+      };
+      await dio.post("/ratings", data: data);
+      ToastService().s("Rating added!");
+      setLoading(true);
+      fetchQuestion();
+      // ignore: empty_catches
+    } catch (err) {}
   }
 }
