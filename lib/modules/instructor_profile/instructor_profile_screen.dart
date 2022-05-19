@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InstructorProfileScreen extends StatelessWidget {
   const InstructorProfileScreen({Key? key}) : super(key: key);
@@ -855,94 +856,125 @@ class InstructorProfileScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              height: 57,
-                              width: 326,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFE9F6FF),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            'assets/svg/twitter.svg'),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          'Twitter',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 53, 51, 51),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12,
-                                              fontFamily: 'Roboto'),
+                            InkWell(
+                              onTap: () async {
+                                if (state.teacherProfileState!.data!.teacher!
+                                            .connects !=
+                                        null &&
+                                    state.teacherProfileState!.data!.teacher!
+                                        .connects!.isNotEmpty) {
+                                  Uri url = Uri.parse(state.teacherProfileState!
+                                      .data!.teacher!.connects!.first.url!);
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url);
+                                  }
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title:
+                                          const Text("Twitter not available"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop(true);
+                                          },
                                         ),
                                       ],
                                     ),
-                                    SvgPicture.asset('assets/svg/arrow.svg'),
-                                  ],
+                                  );
+                                }
+                              },
+                              child: Container(
+                                height: 57,
+                                width: 326,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFFE9F6FF),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/svg/twitter.svg'),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          const Text(
+                                            'Twitter',
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 53, 51, 51),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12,
+                                                fontFamily: 'Roboto'),
+                                          ),
+                                        ],
+                                      ),
+                                      SvgPicture.asset('assets/svg/arrow.svg'),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              height: 57,
-                              width: 326,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFE9F6FF),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                            height: 33,
-                                            width: 33,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xFF42c6a5),
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: SvgPicture.asset(
-                                                'assets/svg/shape.svg',
-                                                color: Colors.white,
-                                              ),
-                                            )),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          'Website',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 53, 51, 51),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12,
-                                              fontFamily: 'Roboto'),
-                                        ),
-                                      ],
-                                    ),
-                                    SvgPicture.asset('assets/svg/arrow.svg'),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Container(
+                            //   height: 57,
+                            //   width: 326,
+                            //   decoration: BoxDecoration(
+                            //       color: const Color(0xFFE9F6FF),
+                            //       borderRadius: BorderRadius.circular(10)),
+                            //   child: Padding(
+                            //     padding:
+                            //         const EdgeInsets.symmetric(horizontal: 8.0),
+                            //     child: Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: [
+                            //         Row(
+                            //           children: [
+                            //             Container(
+                            //                 height: 33,
+                            //                 width: 33,
+                            //                 decoration: BoxDecoration(
+                            //                     color: const Color(0xFF42c6a5),
+                            //                     borderRadius:
+                            //                         BorderRadius.circular(8)),
+                            //                 child: Padding(
+                            //                   padding:
+                            //                       const EdgeInsets.all(8.0),
+                            //                   child: SvgPicture.asset(
+                            //                     'assets/svg/shape.svg',
+                            //                     color: Colors.white,
+                            //                   ),
+                            //                 )),
+                            //             const SizedBox(
+                            //               width: 15,
+                            //             ),
+                            //             const Text(
+                            //               'Website',
+                            //               style: TextStyle(
+                            //                   color: Color.fromARGB(
+                            //                       255, 53, 51, 51),
+                            //                   fontWeight: FontWeight.bold,
+                            //                   fontSize: 12,
+                            //                   fontFamily: 'Roboto'),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //         SvgPicture.asset('assets/svg/arrow.svg'),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                             lHeightSpan,
                             lHeightSpan,
                             lHeightSpan,

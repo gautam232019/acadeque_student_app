@@ -54,36 +54,44 @@ class Teacher {
   bool? approved;
   String? createdAt;
   String? description;
-  Experience? experience;
   num? students;
   String? profileURL;
+  String? uuid;
+  String? contact;
+  List<Connects>? connects;
+  Experience? experience;
 
   Teacher(
       {this.sId,
       this.name,
+      this.uuid,
       this.authProvider,
+      this.profileURL,
       this.role,
       this.email,
       this.work,
       this.subjects,
       this.hourlyRate,
+      this.description,
+      this.experience,
       this.minuteRate,
       this.avgRating,
       this.enableInstantSession,
       this.disabled,
       this.approved,
       this.createdAt,
-      this.description,
-      this.experience,
-      this.students,
-      this.profileURL});
+      this.contact,
+      this.connects});
 
   Teacher.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
+    uuid = json['uuid'];
     authProvider = json['authProvider'];
+    profileURL = json['profileURL'] ?? "";
     role = json['role'];
     email = json['email'];
+    description = json['description'];
     work = json['work'];
     if (json['subjects'] != null) {
       subjects = <Subjects>[];
@@ -91,6 +99,9 @@ class Teacher {
         subjects!.add(new Subjects.fromJson(v));
       });
     }
+    experience = json['experience'] != null
+        ? new Experience.fromJson(json['experience'])
+        : null;
     hourlyRate = json['hourlyRate'];
     minuteRate = json['minuteRate'];
     avgRating = json['avgRating'];
@@ -98,19 +109,22 @@ class Teacher {
     disabled = json['disabled'];
     approved = json['approved'];
     createdAt = json['createdAt'];
-    description = json['description'];
-    experience = json['experience'] != null
-        ? new Experience.fromJson(json['experience'])
-        : null;
-    students = json['students'] ?? 0;
-    profileURL = json['profileURL'] ?? "";
+    contact = json['contact'] != null ? json['contact'].toString() : "";
+    if (json['connects'] != null) {
+      connects = <Connects>[];
+      json['connects'].forEach((v) {
+        connects!.add(new Connects.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['name'] = this.name;
+    data['uuid'] = this.uuid;
     data['authProvider'] = this.authProvider;
+    data['profileURL'] = this.profileURL;
     data['role'] = this.role;
     data['email'] = this.email;
     data['work'] = this.work;
@@ -124,12 +138,10 @@ class Teacher {
     data['disabled'] = this.disabled;
     data['approved'] = this.approved;
     data['createdAt'] = this.createdAt;
-    data['description'] = this.description;
-    if (this.experience != null) {
-      data['experience'] = this.experience!.toJson();
+    data['contact'] = this.contact;
+    if (this.connects != null) {
+      data['connects'] = this.connects!.map((v) => v.toJson()).toList();
     }
-    data['students'] = this.students;
-    data['profileURL'] = this.profileURL;
     return data;
   }
 }
@@ -178,6 +190,28 @@ class CourseId {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['name'] = this.name;
+    return data;
+  }
+}
+
+class Connects {
+  String? name;
+  String? url;
+  String? sId;
+
+  Connects({this.name, this.url, this.sId});
+
+  Connects.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+    sId = json['_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['url'] = this.url;
+    data['_id'] = this.sId;
     return data;
   }
 }
