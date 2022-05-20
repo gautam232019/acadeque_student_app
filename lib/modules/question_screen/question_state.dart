@@ -32,6 +32,7 @@ class QuestionState extends BaseState {
   }
 
   onAddRating(satisfaction) async {
+    setLoading(true);
     try {
       var data = {
         "rateTo": "answer",
@@ -40,7 +41,6 @@ class QuestionState extends BaseState {
       };
       await dio.post("/ratings", data: data);
       ToastService().s("Rating added!");
-      setLoading(true);
       fetchQuestion();
       // ignore: empty_catches
     } catch (err) {}
